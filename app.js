@@ -16,10 +16,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use('/admin/',adminRoutes);
 app.use(pharmRoutes);
 
-app.use('*', (req, res) => {
-    console.log('No path found!');
-    res.redirect('/');
-});
+// app.use('*', (req, res) => {
+//     console.log('No path found!');
+//     res.redirect('/');
+// });
 
 // app.listen(port, () => {
 //     console.log("Server Started At Port "+port);
@@ -35,3 +35,5 @@ mongoose
     .catch(err => {
         console.log(err);
     });
+
+// "C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe" --dbpath "D:\Studies\Projects\NodeJS\OnlinePharmacy\data"

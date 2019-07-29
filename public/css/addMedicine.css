@@ -1,3 +1,9 @@
 body {
     background-color: gainsboro;
 }
+tr{
+    text-align: center;
+}
+td, th{
+    padding: 2px;
+}

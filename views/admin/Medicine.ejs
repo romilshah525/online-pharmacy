@@ -5,18 +5,26 @@
     <body>
         <%- include("../includes/navBar.ejs") %>
         <main>
-            <h1>
-                <%= mainContent %>
-            </h1>
+            <h1><%= mainContent %></h1>
             <% if (medicines.length > 0) { %>
-                <% for (let medicine of medicines) { %>
-                    <p>
-                        name: <%= medicine.name %> <br>
-                        expDate: <%= medicine.expDate %> <br>
-                        price: <%= medicine.price %> <br>
-                        medType: <%= medicine.medType %> <br>
-                    </p>
-                <% } %>
+                <table style = "width : 80%" border="1px">
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Medicine Type</th>
+                        <th>Expiry Date</th>
+                    </tr>
+                    <% for (let medicine of medicines) { %>
+                    <tr>
+                        <td><%= medicine.name %></td>
+                        <td><%= medicine.price %></td>
+                        <td><%= medicine.medType %></td>
+                        <td><%= medicine.expDate.getDate() +"/" + (medicine.expDate.getMonth()+1) + "/" +medicine.expDate.getFullYear() %></td>
+                        <td><button><a href="/admin/addMed/<%= medicine.id %>">Edit Medicine</a></button></td>
+                        <td><button><a href="/admin/medList/<%= medicine.id %>">Delete Medicine</a></button></td>
+                    </tr>
+                    <% } %>
+                </table>
             <% } else { %>
                 <h3>No medicines found! </h3>
             <% } %>

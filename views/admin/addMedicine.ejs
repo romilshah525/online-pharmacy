@@ -6,18 +6,21 @@
         <%- include("../includes/navBar.ejs") %>
         <main>
             <%= mainContent %>
-            <p>
-                <form action="/admin/addMed" method="POST">
-                    <label for="">name</label>
-                    <input type="text" name="name" id="">
-                    <label for="">expDate</label>
-                    <input type="text" name="expDate">
-                    <label for="">price</label>
-                    <input type="text" name="price">
-                    <label for="">medType</label>
-                    <input type="text" name="medType">
-                    <button type="submit">Add Medcine</button>
+            <% if (edit) { %>
+                <h1>Editing mode is on!</h1>
+            <% } else { %>
+                <h1>Editing mode is off! </h1>
+            <% } %> 
+                <form action="/admin/addMed<% if (edit) { %>/<%= medicine.id %><% } %>" method="POST">
+                    <label for="name">name</label>
+                    <input type="text" name="name" value="<% if (edit) { %><%= medicine.name %><% } %>">
+                    <label for="expDate">expDate</label>
+                    <input type="text" name="expDate" value="<% if (edit) { %><%= medicine.expDate %><% } %>">
+                    <label for="price">price</label>
+                    <input type="text" name="price" value="<% if (edit) { %><%= medicine.price %><% } %>">
+                    <label for="medType">medType</label>
+                    <input type="text" name="medType" value="<% if (edit) { %><%= medicine.medType %><% } %>">
+                    <button type="submit"><% if (edit) { %>Update Medicine<% } else { %>Add Medicine<% } %></button>
                 </form>
-            </p>
         </main>
         <%- include("../includes/footer.ejs") %>

@@ -7,11 +7,11 @@ const medSchema = new Schema({
         required: true
     },
     expDate: {
-        type: String,
+        type: Date,
         required: true
     },
     price: {
-        type: String,
+        type: Number,
         required: true
     },
     medType: {
