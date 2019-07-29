@@ -1,0 +1,24 @@
+<%- include('../includes/header.ejs') %>
+        <link rel="stylesheet" href="/css/addMedicine.css">
+        <title><%= pageTitle %></title>
+    </head>
+    <body>
+        <%- include("../includes/navBar.ejs") %>
+        <main>
+            <h1>
+                <%= mainContent %>
+            </h1>
+            <% if (medicines.length > 0) { %>
+                <% for (let medicine of medicines) { %>
+                    <p>
+                        name: <%= medicine.name %> <br>
+                        expDate: <%= medicine.expDate %> <br>
+                        price: <%= medicine.price %> <br>
+                        medType: <%= medicine.medType %> <br>
+                    </p>
+                <% } %>
+            <% } else { %>
+                <h3>No medicines found! </h3>
+            <% } %>
+        </main>
+    <%- include("../includes/footer.ejs") %>

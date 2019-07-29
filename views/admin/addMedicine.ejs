@@ -1,0 +1,23 @@
+<%- include('../includes/header.ejs') %>
+        <link rel="stylesheet" href="/css/addMedicine.css">
+        <title><%= pageTitle%></title>
+    </head>
+    <body>
+        <%- include("../includes/navBar.ejs") %>
+        <main>
+            <%= mainContent %>
+            <p>
+                <form action="/admin/addMed" method="POST">
+                    <label for="">name</label>
+                    <input type="text" name="name" id="">
+                    <label for="">expDate</label>
+                    <input type="text" name="expDate">
+                    <label for="">price</label>
+                    <input type="text" name="price">
+                    <label for="">medType</label>
+                    <input type="text" name="medType">
+                    <button type="submit">Add Medcine</button>
+                </form>
+            </p>
+        </main>
+        <%- include("../includes/footer.ejs") %>
