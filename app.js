@@ -16,20 +16,16 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use('/admin/',adminRoutes);
 app.use(pharmRoutes);
 
-// app.use('*', (req, res) => {
-//     console.log('No path found!');
-//     res.redirect('/');
-// });
-
-// app.listen(port, () => {
-//     console.log("Server Started At Port "+port);
-// });
+app.use('', (req, res) => {
+    console.log('No path found!');
+    res.redirect('/');
+});
 
 mongoose
     .connect("mongodb://localhost/pharmacy")
     .then(res => {
-        app.listen(3000, ()=>{
-            console.log("Server started at 3000");
+        app.listen(port, ()=>{
+            console.log("Server started at Port :" + port);
             });
         })
     .catch(err => {

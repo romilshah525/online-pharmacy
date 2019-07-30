@@ -3,9 +3,9 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', pharmacyController.getDashboard);
-router.get('/cart', pharmacyController.getCart);
+router.get('/cart/:id', pharmacyController.getCartById);
 router.get('/checkout', pharmacyController.getCheckOut);
-router.get('/medDetails',pharmacyController.getMedicineDetails);
+// router.get('/medDetails',pharmacyController.getMedicineDetails);
 router.get('/medList', pharmacyController.getMedicineList);
 router.get('/orders', pharmacyController.getOrders);
 

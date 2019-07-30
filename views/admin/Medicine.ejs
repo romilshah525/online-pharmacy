@@ -6,7 +6,9 @@
         <%- include("../includes/navBar.ejs") %>
         <main>
             <h1><%= mainContent %></h1>
-            <% if (medicines.length > 0) { %>
+            <% if (admin) { %><h2>Admin Logged In</h2>
+            <% } else { %> <h2>User LoggedIn</h2> <% } %>
+            <% if (length > 0) { %>
                 <table style = "width : 80%" border="1px">
                     <tr>
                         <th>Name</th>
@@ -20,13 +22,17 @@
                         <td><%= medicine.price %></td>
                         <td><%= medicine.medType %></td>
                         <td><%= medicine.expDate.getDate() +"/" + (medicine.expDate.getMonth()+1) + "/" +medicine.expDate.getFullYear() %></td>
-                        <td><button><a href="/admin/addMed/<%= medicine.id %>">Edit Medicine</a></button></td>
-                        <td><button><a href="/admin/medList/<%= medicine.id %>">Delete Medicine</a></button></td>
+                        <% if (admin) { %>
+                            <td><button><a href="/admin/addMed/<%= medicine.id %>">Edit Medicine</a></button></td>
+                            <td><button><a href="/admin/medList/<%= medicine.id %>">Delete Medicine</a></button></td>
+                        <% } else { %>
+                            <td><button><a href="/cart/<%= medicine.id %>">Add To Cart</a></button></td>
+                        <% } %>
                     </tr>
                     <% } %>
                 </table>
             <% } else { %>
-                <h3>No medicines found! </h3>
+                <h3>No medicines found!</h3>
             <% } %>
         </main>
     <%- include("../includes/footer.ejs") %>

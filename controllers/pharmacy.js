@@ -1,3 +1,5 @@
+const Medicine = require('../models/medicine');
+
 exports.getDashboard = (req, res) => {
     res.render('pharmacy/dashboard',{
         pageTitle: 'Pharmacy', 
@@ -5,10 +7,11 @@ exports.getDashboard = (req, res) => {
     });
 };
 
-exports.getCart = (req, res) => {
+exports.getCartById = (req, res) => {
     res.render('pharmacy/cart',{
         pageTitle: 'My Cart', 
-        mainContent: 'Welcome to your cart'
+        mainContent: 'Welcome to your cart',
+        cartId: req.params.id
     });
 };
 
@@ -19,17 +22,15 @@ exports.getCheckOut = (req, res) => {
     });
 };
 
-exports.getMedicineDetails =  (req, res) => {
-    res.render('pharmacy/medDetails',{
-        pageTitle: 'Medicine Details', 
-        mainContent: 'Welcome to your Medicine Details'
-    });
-};
-
 exports.getMedicineList =  (req, res) => {
-    res.render('pharmacy/medList',{
-        pageTitle: 'Medicine List', 
-        mainContent: 'Welcome to your Medicine List'
+    Medicine.find({}, (err, medicine) => {
+        res.render('admin/Medicine',{
+                pageTitle: 'Medicine List',
+                mainContent: 'Welcome to your Medicine List',
+                medicines: medicine,
+                length: medicine.length,
+                admin: false
+            });
     });
 };
 

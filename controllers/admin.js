@@ -30,7 +30,7 @@ exports.postAddMedicine = (req, res) => {
         res.redirect('/admin/medList');
 };
 
-exports.getEditMedicine = (req, res) => {
+exports.getEditMedicineById = (req, res) => {
     const id = req.params.id;
     Medicine.findById(id, (err, medicine) => {
         res.render('admin/addMedicine',{
@@ -42,7 +42,7 @@ exports.getEditMedicine = (req, res) => {
     });
 };
 
-exports.postEditMedicine  = (req, res) => {
+exports.postEditMedicineById  = (req, res) => {
     const id = req.params.id;
     const name = req.body.name;
     const expDate = req.body.expDate;
@@ -66,7 +66,18 @@ exports.getMedList = (req, res) => {
         res.render('admin/Medicine',{
                 pageTitle: 'Medicine List',
                 mainContent: 'Welcome to your Medicine List',
-                medicines: medicine
+                length: medicine.length,
+                medicines: medicine,
+                admin: true
             });
+    });
+};
+
+exports.deleteMedById = (req, res) => {
+    const id = req.params.id;
+    Medicine.findOneAndRemove({_id:id}, (err, medicine) => {
+        console.log("Medicine Deleted");
+        console.log(medicine);
+        res.redirect('/admin/medList');
     });
 };
