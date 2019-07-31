@@ -4,9 +4,9 @@ const router = express.Router();
 
 router.get('/addMed', adminController.getAddMedicine);
 router.post('/addMed',adminController.postAddMedicine);
-router.get('/addMed/:id', adminController.getEditMedicineById);
-router.post('/addMed/:id',adminController.postEditMedicineById);
-router.get('/medList', adminController.getMedList);
-router.get('/medList/:id', adminController.deleteMedById);
+router.get('/addMed/:id', adminController.getUpdateMedicine);
+router.post('/addMed/:id',adminController.postUpdateMedicine);
+router.get('/medList', adminController.getMedicineList);
+router.get('/medList/:id', adminController.deleteMedicine);
 
 module.exports = router;

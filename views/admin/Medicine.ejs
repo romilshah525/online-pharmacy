@@ -1,5 +1,5 @@
 <%- include('../includes/header.ejs') %>
-        <link rel="stylesheet" href="/css/addMedicine.css">
+        <% if (admin) { %><link rel="stylesheet" href="/css/addMedicine.css"><% } %>
         <title><%= pageTitle %></title>
     </head>
     <body>
@@ -9,7 +9,7 @@
             <% if (admin) { %><h2>Admin Logged In</h2>
             <% } else { %> <h2>User LoggedIn</h2> <% } %>
             <% if (length > 0) { %>
-                <table style = "width : 80%" border="1px">
+                <table style = "width : 50%" border="1px">
                     <tr>
                         <th>Name</th>
                         <th>Price</th>
@@ -23,7 +23,7 @@
                         <td><%= medicine.medType %></td>
                         <td><%= medicine.expDate.getDate() +"/" + (medicine.expDate.getMonth()+1) + "/" +medicine.expDate.getFullYear() %></td>
                         <% if (admin) { %>
-                            <td><button><a href="/admin/addMed/<%= medicine.id %>">Edit Medicine</a></button></td>
+                            <td><button><a href="/admin/addMed/<%= medicine.id %>?edit=true">Edit Medicine</a></button></td>
                             <td><button><a href="/admin/medList/<%= medicine.id %>">Delete Medicine</a></button></td>
                         <% } else { %>
                             <td><button><a href="/cart/<%= medicine.id %>">Add To Cart</a></button></td>

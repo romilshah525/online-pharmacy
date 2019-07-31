@@ -1,6 +1,6 @@
 const Medicine = require('../models/medicine');
 
-exports.getDashboard = (req, res) => {
+exports.getHome = (req, res) => {
     res.render('pharmacy/dashboard',{
         pageTitle: 'Pharmacy', 
         mainContent: 'Welcome to abc pharmacy'
