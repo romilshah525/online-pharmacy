@@ -3,7 +3,8 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', pharmacyController.getHome);
-router.get('/cart/:id', pharmacyController.getCartById);
+router.get('/cart', pharmacyController.getCart);
+router.post('/cart', pharmacyController.postCart);
 router.get('/checkout', pharmacyController.getCheckOut);
 router.get('/medList', pharmacyController.getMedicineList);
 router.get('/orders', pharmacyController.getOrders);

@@ -12,12 +12,34 @@ const userSchema = new Schema({
     // password: { type: String, required: true },
     cart: {
         items: [
-            {
-                medicineId: { type: Schema.Types.ObjectId, required: true },
-                quantity: { type: Number, required: true }
-            }
-        ]
+                {
+                    medicineId: { type: Schema.Types.ObjectId, ref:'Medicine', required: true },
+                    quantity: { type: Number, required: true }
+                }
+            ]
     }
 });
+ 
+userSchema.methods.addToCart = function ( medicine ) { //don't use arrow function, as arrow function doesn't allow 'this' keyword
+    const cartMedicineIndex = this.cart.items.findIndex( index => {
+        return index.medicineId.toString() === medicine._id.toString();
+    });
+    let newQuantity = 1;
+    const updatedCartItems = [...this.cart.items];
+    if(cartMedicineIndex >= 0) {
+        newQuantity = this.cart.items[cartMedicineIndex].quantity + 1;
+        updatedCartItems[cartMedicineIndex].quantity = newQuantity;
+    } else {
+        updatedCartItems.push({
+            medicineId: medicine._id,
+            quantity: newQuantity
+        });
+    }
+    const updatedCart = {
+        items: updatedCartItems
+    };
+    this.cart = updatedCart;
+    return this.save();
+}
 
 module.exports = mongoose.model('User', userSchema);

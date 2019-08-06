@@ -26,7 +26,13 @@
                             <td><button><a href="/admin/addMed/<%= medicine.id %>?edit=true">Edit Medicine</a></button></td>
                             <td><button><a href="/admin/medList/<%= medicine.id %>">Delete Medicine</a></button></td>
                         <% } else { %>
-                            <td><button><a href="/cart/<%= medicine.id %>">Add To Cart</a></button></td>
+                            <td>
+                                <form method="post" action="/cart">
+                                    <button>Add To Cart</button>
+                                    <input type="hidden" name="medId" value="<%= medicine.id %>">
+                                    <% console.log(medicine.id) %>
+                                </form>
+                            </td>
                         <% } %>
                     </tr>
                     <% } %>
