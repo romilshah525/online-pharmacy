@@ -42,4 +42,12 @@ userSchema.methods.addToCart = function ( medicine ) { //don't use arrow functio
     return this.save();
 }
 
+userSchema.methods.removeFromCart = function (medId) {
+    const updatedCartItems = this.cart.items.filter( item => {
+        return item.medicineId.toString() !== medId.toString();
+    });
+    this.cart.items = updatedCartItems;
+    return this.save();
+}
+
 module.exports = mongoose.model('User', userSchema);

@@ -15,7 +15,11 @@
                     <label for="name">name</label>
                     <input type="text" name="name" value="<% if (edit) { %><%= medicine.name %><% } %>">
                     <label for="expDate">expDate</label>
-                    <input type="text" name="expDate" value="<% if (edit) { %><%= medicine.expDate.getDate() +"/" + (medicine.expDate.getMonth()+1) + "/" +medicine.expDate.getFullYear() %><% } %>">
+                    <% if (!edit) { %>
+                        <input type="text" name="expDate" value=''>
+                    <% } else { %>
+                        <label for="expDate"><%= medicine.expDate.getDate() +"/" + (medicine.expDate.getMonth()+1) + "/" +medicine.expDate.getFullYear() %></label>
+                    <% } %>
                     <label for="price">price</label>
                     <input type="text" name="price" value="<% if (edit) { %><%= medicine.price %><% } %>">
                     <label for="medType">medType</label>

@@ -16,6 +16,11 @@
                     <tr>
                         <td><%= medicine.medicineId.name %></td>
                         <td><%= medicine.quantity %></td>
+                        <td>
+                            <form action="/cart/<%=medicine.medicineId._id%>" method="POSt">
+                            <button type="submit">Delete From Cart</button>
+                            </form>
+                        </td>
                     </tr>
                     <% } %>
                 </table>

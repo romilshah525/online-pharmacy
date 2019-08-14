@@ -14,8 +14,6 @@ exports.postAddMedicine = (req, res) => {
     const price = req.body.price;
     const medType = req.body.medType;
     const user = req.user;
-    console.log("-----------------");
-    console.log(user);
     const medicine = new Medicine ({
             name: name,
             expDate: expDate,
@@ -26,10 +24,6 @@ exports.postAddMedicine = (req, res) => {
     medicine
         .save()
         .then(med => {
-            console.log("_______________________");
-            console.log("Medicine Created!");
-            console.log(med);
-            // console.log("_______________________");
             res.redirect('/admin/medList');
         })
         .catch(err => {
@@ -58,22 +52,16 @@ exports.getUpdateMedicine = (req, res) => {
 exports.postUpdateMedicine  = (req, res) => {
     const id = req.params.id;
     const name = req.body.name;
-    const expDate = req.body.expDate;
     const price = req.body.price;
     const medType = req.body.medType;
     Medicine.findById(id)
         .then( medicine => {
             medicine.name = name;
-            medicine.expDate = expDate;
             medicine.price = price;            
             medicine.medType = medType ;
             return medicine.save();
         })
         .then( medicine => {
-            console.log("_______________________");
-            console.log("Medicine Updated :-");
-            console.log(medicine);
-            // console.log("_______________________");
             res.redirect('/admin/medList');
         })
         .catch( err => {
@@ -85,9 +73,6 @@ exports.postUpdateMedicine  = (req, res) => {
 exports.getMedicineList = (req, res) => {
     Medicine.find()
         .then( medicine => {
-            console.log("_______________________");
-            console.log("Medicine list received.");
-            // console.log("_______________________");
             res.render('admin/Medicine',{
                 pageTitle: 'Medicine List',
                 mainContent: 'Welcome to your Medicine List',
@@ -106,10 +91,6 @@ exports.deleteMedicine = (req, res) => {
     const id = req.params.id;
     Medicine.findByIdAndRemove(id)
     .then( medicine => {
-        console.log("_______________________");
-        console.log("Medicine Deleted :");
-        console.log(medicine);
-        // console.log("_______________________");
         res.redirect('/admin/medList');
     })
     .catch( err => {
