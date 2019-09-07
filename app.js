@@ -7,7 +7,7 @@ const app = express();
 
 const pharmRoutes = require('./routes/pharmacy');
 const adminRoutes = require('./routes/admin');
-const port = 3000;
+const port = 3001   ;
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
