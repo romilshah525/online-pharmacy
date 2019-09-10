@@ -23,8 +23,16 @@
                         <td><%= medicine.medType %></td>
                         <td><%= medicine.expDate.getDate() +"/" + (medicine.expDate.getMonth()+1) + "/" +medicine.expDate.getFullYear() %></td>
                         <% if (admin) { %>
-                            <td><button><a href="/admin/addMed/<%= medicine.id %>?edit=true">Edit Medicine</a></button></td>
-                            <td><button><a href="/admin/medList/<%= medicine.id %>">Delete Medicine</a></button></td>
+                            <td>
+                                <button>
+                                    <a href="/admin/addMed/<%= medicine.id %>?edit=true">Edit Medicine</a>
+                                </button>
+                            </td>
+                            <td>
+                                <button>
+                                    <a href="/admin/medList/<%= medicine.id %>">Delete Medicine</a>
+                                </button>
+                            </td>
                         <% } else { %>
                             <td>
                                 <form method="post" action="/cart">

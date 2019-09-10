@@ -1,31 +1,30 @@
 <%- include('../includes/header.ejs') %>
-
         <title><%= pageTitle %></title>
     </head>
     <body>
         <%- include("../includes/navBar.ejs") %>
         <main>
             <h1><%= mainContent %></h1>
-            <% if (length > 0) { %>
-                <table style = "width : 50%" border="1px">
-                    <tr>
-                        <th>Name</th>
-                        <th>Quantity</th>
-                    </tr>
-                    <% for (let medicine of medicines) { %>
-                    <tr>
-                        <td><%= medicine.medicineId.name %></td>
-                        <td><%= medicine.quantity %></td>
-                        <td>
-                            <form action="/cart/<%=medicine.medicineId._id%>" method="POSt">
-                            <button type="submit">Delete From Cart</button>
-                            </form>
-                        </td>
-                    </tr>
-                    <% } %>
-                </table>
-            <% } else { %>
-                <h3>No medicines added to cart!</h3>
-            <% } %>
+                <% if (length > 0) { %>
+                    <table style = "width : 50%" border="1px">
+                        <tr>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                        <% for (let medicine of medicines) { %>
+                            <tr>
+                                <td><%= medicine.medicineId.name %></td>
+                                <td><%= medicine.quantity %></td>
+                                <td>
+                                    <form action="/cart/<%=medicine.medicineId._id%>" method="POSt">
+                                    <button type="submit">Delete From Cart</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% } %>
+                    </table>
+                <% } else { %>
+                    <h3>No medicines added to cart!</h3>
+                <% } %>
         </main>
     <%- include("../includes/footer.ejs") %>

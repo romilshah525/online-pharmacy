@@ -1,0 +1,18 @@
+<%- include('../includes/header.ejs') %>
+        <title><%= pageTitle %></title>
+    </head>
+    <body>
+        <%- include("../includes/navBar.ejs") %>
+        <main>
+            <h1><%= mainContent %></h1>
+            <form action="/login" method="post">
+                <label for="">Email</label>
+                <input type="email" name="email">
+                
+                <label for="">Password</label>
+                <input type="password" name="pwd">
+
+                <button type="submit">Login</button>
+            </form>
+        </main>
+    <%- include("../includes/footer.ejs") %>
