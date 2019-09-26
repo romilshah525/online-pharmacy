@@ -1,30 +1,55 @@
 <%- include('../includes/header.ejs') %>
-        <title><%= pageTitle %></title>
+        <title>ABC Pharmacy</title>
+        <!-- <script>
+            function change(event, action, id) {
+                console.log(event);
+                event.preventDefault();
+                let value = parseInt(document.getElementById(id).innerHTML, 10);
+                value = isNaN(value) ? 0 : value;
+                if(action === 0) {
+                        value++;
+                } else {
+                    if(value>0) value--;
+                }
+                document.getElementById(id).innerHTML = value;
+            };
+        </script> -->
     </head>
     <body>
         <%- include("../includes/navBar.ejs") %>
         <main>
-            <h1><%= mainContent %></h1>
+            <h1>Your Cart</h1>
                 <% if (length > 0) { %>
-                    <table style = "width : 50%" border="1px">
+                    <table >
                         <tr>
                             <th>Name</th>
                             <th>Quantity</th>
                         </tr>
+                        <% let i = 0 %>
                         <% for (let medicine of medicines) { %>
                             <tr>
+                                <% i++ %>
                                 <td><%= medicine.medicineId.name %></td>
-                                <td><%= medicine.quantity %></td>
-                                <td>
-                                    <form action="/cart/<%=medicine.medicineId._id%>" method="POSt">
-                                    <button type="submit">Delete From Cart</button>
-                                    </form>
-                                </td>
+                                <form action="/delete-from-cart/<%= medicine.medicineId._id %>" method="post">
+                                    <td><label id="<%=i%>" name="medQty"><%= medicine.quantity %></td>
+                                    <!-- <td><button id="<%=i%>" onclick="change(event,0, this.id)">+</button></td>
+                                    <td><button id="<%=i%>" onclick="change(event,1, this.id)">-</button></td> -->
+                                    <td><button type="submit">Delete From Cart</button></td>
+                                    <!-- <% if( i == medicines.length) {%>
+                                    <tr>
+                                        <td><button type="submit">Save Changes</button></td>
+                                    </tr>
+                                    <% } %> -->
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                </form>
                             </tr>
-                            <% } %>
+                        <% } %>
                     </table>
                 <% } else { %>
-                    <h3>No medicines added to cart!</h3>
+                    <h3>No medicines added to the cart.
+                        <br>
+                        <a href="/medicine-list">Click here</a>to add medicines to cart.
+                    </h3>
                 <% } %>
-        </main>
+            </main>
     <%- include("../includes/footer.ejs") %>

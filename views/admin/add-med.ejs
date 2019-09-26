@@ -1,0 +1,30 @@
+<%- include('../includes/header.ejs') %>
+        <link rel="stylesheet" href="/css/addMedicine.css">
+        <title>ABC Pharmacy</title>
+    </head>
+    <body>
+        <%- include("../includes/navBar.ejs") %>
+        <main>
+            <h1>blah blah </h1>
+            <% if (edit) { %>
+                <form action="/admin/medicine/<%= medicine.id %>" method="POST">
+            <% } else { %>
+                <form action="/admin/add-medicine" method="POST">
+            <% } %>
+                <label for="name">name</label>
+                <input type="text" name="name" value="<% if (edit) { %><%= medicine.name %><% } %>">
+                <label for="expDate">expDate</label>
+                <% if (edit) { %>
+                    <label for="expDate"><%= medicine.expDate.getDate() +"/" + (medicine.expDate.getMonth()+1) + "/" +medicine.expDate.getFullYear() %></label>
+                <% } else { %>
+                    <input type="date" name="expDate">
+                <% } %>
+                <label for="price">price</label>
+                <input type="text" name="price" value="<% if (edit) { %><%= medicine.price %><% } %>">
+                <label for="medType">medType</label>
+                <input type="text" name="medType" value="<% if (edit) { %><%= medicine.medType %><% } %>">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>"> <!-- name has to be _csrf -->
+                <button type="submit"><% if (edit) { %>Update Medicine<% } else { %>Add Medicine<% } %></button>
+            </form>
+        </main>
+        <%- include("../includes/footer.ejs") %>

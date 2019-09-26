@@ -4,8 +4,7 @@ const User = require('../models/user');
 exports.getSignUp = (req, res) => {
     res.render('auth/signup',{
         pageTitle: 'Sign Up Page', 
-        mainContent: 'Welcome to Sign up page',
-        isAuthenticated: false
+        mainContent: 'Welcome to Sign up page'
     });
 };
 
@@ -43,8 +42,7 @@ exports.postSignUp = (req, res) => {
 exports.getLogin = (req, res) => {
     res.render('auth/login',{
         pageTitle: 'Login Page', 
-        mainContent: 'Welcome to Log In page',
-        isAuthenticated: false
+        mainContent: 'Welcome to Log In page'
     });
 };
 
@@ -67,7 +65,7 @@ exports.postLogin = (req, res, next) => {
                     if(err) {
                         console.log(err);
                     }
-                    console.log(`User Logged In Correctly: ${user.email}`)
+                    console.log(`User Logged In Correctly: ${user.email}`);
                     res.redirect('/');
                 });
             }
@@ -86,6 +84,7 @@ exports.postLogout = (req, res, next) => {
         if(err) {
             console.log(err);
         }
+        console.log(`User Logged Out!`);
         res.redirect('/');
     });
 };

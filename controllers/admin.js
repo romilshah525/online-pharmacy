@@ -1,17 +1,69 @@
 const Medicine = require('../models/medicine');
 
+exports.getMedicineList = (req, res) => {
+    Medicine.find()
+    .then( medicine => {
+        res.render('admin/med-list',{
+            length: medicine.length,
+            medicines: medicine,
+            admin: true
+        });
+    })
+    .catch( err => {
+        console.log(err);
+        res.redirect('/');
+    });
+};
+
+exports.getEditMedicine = (req, res) => {
+    const id = req.params.medId;
+    const edit = req.query.edit;
+    Medicine.findById(id)
+    .then( medicine => {
+        res.render('admin/add-med',{
+            edit: edit,
+            medicine: medicine
+        });
+    })
+    .catch( err => {
+        console.log(err);
+        res.redirect('/admin/medicine-list');
+    });
+};
+
+exports.postEditMedicine = (req, res) => {
+    const id = req.params.medId;
+    const name = req.body.name;
+    const price = req.body.price;
+    const medType = req.body.medType;
+    Medicine.findById(id)
+    .then( medicine => {
+        medicine.name = name;
+        medicine.price = price;            
+        medicine.medType = medType ;
+        return medicine.save();
+    })
+    .then( medicine => {
+        console.log("Medicine Updated Successfully!");
+        res.redirect('/admin/medicine-list');
+    })
+    .catch( err => {
+        console.log(err);
+        console.log("Medicine Updated Failed!");
+        res.redirect('/admin/medicine-list');
+    });
+};
+
 exports.getAddMedicine = (req, res) => {
-    res.render('admin/addMedicine',{
-        pageTitle: 'Add Medicine',
-        mainContent: 'Welcome to your Add Medicine',
-        edit: false,
-        isAuthenticated: req.session.isLoggedIn
+    res.render('admin/add-med',{
+        edit: false
     });
 };
 
 exports.postAddMedicine = (req, res) => {
     const name = req.body.name;
     const expDate = req.body.expDate;
+    console.log(expDate);
     const price = req.body.price;
     const medType = req.body.medType;
     const user = req.user;
@@ -25,79 +77,23 @@ exports.postAddMedicine = (req, res) => {
     medicine
     .save()
     .then(med => {
-        res.redirect('/admin/medList');
+        res.redirect('/admin/medicine-list');
     })
     .catch(err => {
         console.log(err);
-        res.redirect('/admin/addMed');
-    });
-};
-
-exports.getUpdateMedicine = (req, res) => {
-    const id = req.params.id;
-    Medicine.findById(id)
-    .then( medicine => {
-        res.render('admin/addMedicine',{
-            pageTitle: 'Edit Medicine',
-            mainContent: 'Welcome to Edit Medicine',
-            edit: true,
-            medicine: medicine,
-            isAuthenticated: req.session.isLoggedIn
-        });
-    })
-    .catch( err => {
-        console.log(err);
-        res.redirect('/admin/Medicine');
-    });
-};
-
-exports.postUpdateMedicine  = (req, res) => {
-    const id = req.params.id;
-    const name = req.body.name;
-    const price = req.body.price;
-    const medType = req.body.medType;
-    Medicine.findById(id)
-    .then( medicine => {
-        medicine.name = name;
-        medicine.price = price;            
-        medicine.medType = medType ;
-        return medicine.save();
-    })
-    .then( medicine => {
-        res.redirect('/admin/medList');
-    })
-    .catch( err => {
-        console.log(err);
-        res.redirect('/admin/medList');
-    });
-};
-
-exports.getMedicineList = (req, res) => {
-    Medicine.find()
-    .then( medicine => {
-        res.render('admin/Medicine',{
-            pageTitle: 'Medicine List',
-            mainContent: 'Welcome to your Medicine List',
-            length: medicine.length,
-            medicines: medicine,
-            admin: true,
-            isAuthenticated: req.session.isLoggedIn
-        });
-    })
-    .catch( err => {
-        console.log(err);
-        res.redirect('/');
+        res.redirect('/admin/add-medicine');
     });
 };
 
 exports.deleteMedicine = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.medId;
     Medicine.findByIdAndRemove(id)
     .then( medicine => {
-        res.redirect('/admin/medList');
+        console.log(`${medicine.name} deleted successfully!`);
+        res.redirect('/admin/medicine-list');
     })
     .catch( err => {
         console.log(err);
-        res.redirect('/');
+        res.redirect('/admin/medicine-list');
     });
 };

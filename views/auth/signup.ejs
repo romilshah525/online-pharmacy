@@ -14,7 +14,7 @@
 
                 <label for="">Confirm Password</label>
                 <input type="password" name="cnfrmpwd">
-
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>"> <!-- name has to be _csrf -->
                 <button class="btn" type="submit">Sign Up</button>
             </form>
         </main>

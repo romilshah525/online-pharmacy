@@ -11,6 +11,7 @@ const userSchema = new Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
     pwd: { type: String, required: true },
+    isAdmin: { type: Boolean, default: false },
     cart: {
         items: [
                 {

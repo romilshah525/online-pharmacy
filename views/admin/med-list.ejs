@@ -1,0 +1,35 @@
+<%- include('../includes/header.ejs') %>
+        <title>ABC Pharmacy</title>
+    </head>
+    <body>
+        <%- include("../includes/navBar.ejs") %>
+        <main>
+            <h1>List Of Available Medicines</h1>
+            <% if (length > 0) { %>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Medicine Type</th>
+                        <th>Expiry Date</th>
+                    </tr>
+                    <% for (let medicine of medicines) { %>
+                    <tr>
+                        <td><%= medicine.name %></td>
+                        <td><%= medicine.price %></td>
+                        <td><%= medicine.medType %></td>
+                        <td><%= medicine.expDate.getDate() +"/" + (medicine.expDate.getMonth()+1) + "/" +medicine.expDate.getFullYear() %></td>
+                        <td>
+                            <button><a href="/admin/medicine/<%= medicine.id %>?edit=true">Edit Medicine</a></button>
+                        </td>
+                        <td>
+                            <button><a href="/admin/delete-medicine/<%= medicine.id %>">Delete Medicine</a></button>
+                        </td>
+                    </tr>
+                    <% } %>
+                </table>
+            <% } else { %>
+                <h3>No Medicines Available!</h3>
+            <% } %>
+        </main>
+    <%- include("../includes/footer.ejs") %>

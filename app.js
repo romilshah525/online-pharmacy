@@ -1,7 +1,6 @@
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const bodyParser = require('body-parser');
-const User = require('./models/user');
 const mongoose = require('mongoose');
 const express = require('express');
 const csrf = require('csurf');
@@ -11,16 +10,16 @@ const errorController = require('./controllers/error');
 const pharmRoutes = require('./routes/pharmacy');
 const adminRoutes = require('./routes/admin');
 const authRoutes = require('./routes/auth');
+const User = require('./models/user');
 
-const app = express();
-const MONGODB_URI = "mongodb://localhost/pharmacy";
-const port = 3000;
+const MONGODB_URL = "mongodb://localhost/pharmacy";
+const csrfProtection = csrf();
 const store = new MongoDBStore({
-        uri: MONGODB_URI,
+        uri: MONGODB_URL,
         collection: 'sessions'
     });
-const csrfProtection = csrf();
-
+const app = express();
+const port = 3000;
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -40,26 +39,36 @@ app.use((req, res, next ) => {
     if (!req.session.user) {
         return next();
     }
-    User.findById('5d53e4bcd2b1f91fb8d98ecb')
+    User.findById(req.session.user._id)
     .then( user => {
         req.user = user;
+        console.log(`==> User Logged In : ${req.user.email}`);
         next();
     })
     .catch( err => {
         console.log(err);
     });
 });
-
+app.use((req, res, next)=>{
+    res.locals.isAuthenticated = req.session.isLoggedIn;
+    if(res.locals.isAuthenticated) {
+        res.locals.isAdmin = req.session.user.isAdmin;
+    } else {
+        res.locals.isAdmin = false;
+    }
+    res.locals.csrfToken = req.csrfToken();
+    next();
+});
 app.use('/admin/',adminRoutes);
 app.use(authRoutes);
 app.use(pharmRoutes);
 app.use(errorController.get404);
 
 mongoose
-    .connect(MONGODB_URI, { useNewUrlParser: true })
+    .connect(MONGODB_URL, { useNewUrlParser: true })
     .then( res => {
         app.listen(port, ()=>{
-            console.log("==> Server started at Port :" + port);
+            console.log(`==> Server started at http://localhost:${port}/`);
             });
         })
     .catch(err => {
