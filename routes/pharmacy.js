@@ -9,5 +9,6 @@ router.get('/medicine-list', pharmacyController.getMedicineList);
 router.get('/cart', isAuth, pharmacyController.getCart);
 router.post('/add-to-cart', isAuth, pharmacyController.postAddToCart);
 router.post('/delete-from-cart/:medicineId', isAuth, pharmacyController.postDeleteFromCart);
+router.get('/place-order', isAuth, pharmacyController.placeOrder);
 
 module.exports = router;

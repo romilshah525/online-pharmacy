@@ -1,5 +1,16 @@
 const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
 const User = require('../models/user');
+
+var emailReceiver;
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+    user: 'shahromil525@gmail.com',
+    pass: 'rldegzyqjsqirwpf'
+  }
+});
 
 exports.getSignUp = (req, res) => {
     res.render('auth/signup',{
@@ -16,6 +27,7 @@ exports.postSignUp = (req, res) => {
     User.findOne({email: email})
     .then( userDoc => {
         if(userDoc){
+            console.log(`${email} already registered!`);
             return res.redirect('/signup');
         }
         return bcrypt.hash(pwd, salt)
@@ -29,8 +41,30 @@ exports.postSignUp = (req, res) => {
             return user.save();
         })
         .then(result => {
-            console.log(`User Created Successfully: ${result.email}`);
-            res.redirect('/login');
+            emailReceiver = result.email;
+            return console.log(`User Created Successfully: ${result.email}`);
+        })
+        .then( () => {
+            let mailOptions = {
+                from: 'shahromil525@gmail.com',
+                to: emailReceiver,
+                subject: 'Welcome to ABC Pharmacy!',
+                text: 'Hey there, welcome to ABC Pharmacy.'
+            };
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                    console.log(error);
+                }
+                else {
+                    console.log(`Email sent: ${info.messageId}`);
+                    console.log(`Email sent: ${info.response}`);
+                }
+              });
+              res.redirect('/login');
+        })
+        .catch(err => {
+            console.log(`${err}`);
+            res.redirect('/signup');
         });
     })
     .catch(err => {
@@ -52,7 +86,7 @@ exports.postLogin = (req, res, next) => {
     User.findOne({email: emailEntered})
     .then(user => {
         if(!user){
-            console.log('Wrong user!');
+            console.log(`${emailEntered} not found!`);
             return res.redirect('/login');
         }
         bcrypt
@@ -69,7 +103,7 @@ exports.postLogin = (req, res, next) => {
                     res.redirect('/');
                 });
             }
-            console.log('Wrong password!');
+            console.log(`Wrong password for ${user.email}`);
             res.redirect('/login'); 
         });
     })
