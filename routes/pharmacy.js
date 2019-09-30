@@ -12,6 +12,5 @@ router.post('/delete-from-cart/:medicineId', isAuth, pharmacyController.postDele
 router.get('/place-order', isAuth, pharmacyController.placeOrder);
 router.get('/clear-cart', isAuth, pharmacyController.clearCart);
 router.get('/orders', isAuth, pharmacyController.getOrders);
-// router.post('/update-cart', isAuth, pharmacyController.postUpdateCart);
 
 module.exports = router;

@@ -42,7 +42,6 @@ app.use((req, res, next ) => {
     User.findById(req.session.user._id)
     .then( user => {
         req.user = user;
-        // console.log(`==> User Logged In : ${req.user.email}`);
         next();
     })
     .catch( err => {
@@ -65,7 +64,7 @@ app.use(pharmRoutes);
 app.use(errorController.get404);
 
 mongoose
-    .connect(MONGODB_URI, {
+.connect(MONGODB_URI, {
         useNewUrlParser: true,
         useFindAndModify: false
         })

@@ -15,16 +15,14 @@ const userSchema = new Schema({
     resetToken: String,
     resetTokenExpirationDate: Date,
     cart: {
-        items: [
-                {
+        items: [{
                     medicineId: { type: Schema.Types.ObjectId, ref:'Medicine', required: true },
                     quantity: { type: Number, required: true }
-                }
-            ]
+                }]
     }
 });
  
-userSchema.methods.addToCart = function ( medicine ) { //don't use arrow function, as arrow function doesn't allow 'this' keyword
+userSchema.methods.addToCart = function ( medicine ) { 
     const cartMedicineIndex = this.cart.items.findIndex( index => {
         return index.medicineId.toString() === medicine._id.toString();
     });
