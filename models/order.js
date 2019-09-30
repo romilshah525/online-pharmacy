@@ -2,21 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
-    medicines: [{
-        medicine: { type: Object, required: true },
-        quantity: { type: Number, required: true }
-    }],
-    user: {
-        name: {
-            type: String,
-            required: true
-        },
-        userId: {
-            type: Schema.Types.ObjectId,
-            required: true,
-            ref: 'User'
+    medicines: [
+        {
+            medicine: { type: Object, required: true },
+            quantity: { type: Number, required: true }
         }
-    }
+    ],
+    userId: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
+    amount: { type: Number, required: true }
 });
 
 module.exports = mongoose.model('Order', orderSchema);

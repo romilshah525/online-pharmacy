@@ -1,21 +1,29 @@
 <%- include('../includes/header.ejs') %>
-        <title><%= pageTitle %></title>
+        <title>ABC Pharmacy</title>
+        <script>
+            function validate(e) {
+                let pwd = document.getElementById('pwd').value;
+                let cnfrmpwd = document.getElementById('cnfrmpwd').value;
+                if(pwd !== cnfrmpwd) {
+                    e.preventDefault();
+                }
+            }
+        </script>
     </head>
     <body>
         <%- include("../includes/navBar.ejs") %>
         <main>
-            <h1><%= mainContent %></h1>
             <form action="/signup" method="post">
                 <label for="">Email</label>
-                <input type="email" name="email">
+                <input type="email" name="email" autocomplete="username">
                 
                 <label for="">Password</label>
-                <input type="password" name="pwd"> 
+                <input type="password" name="pwd" id="pwd" autocomplete="new-password"> 
 
                 <label for="">Confirm Password</label>
-                <input type="password" name="cnfrmpwd">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>"> <!-- name has to be _csrf -->
-                <button class="btn" type="submit">Sign Up</button>
+                <input type="password" name="cnfrmpwd" id="cnfrmpwd" autocomplete="new-password">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" onclick="validate(event)">Sign Up</button>
             </form>
         </main>
     <%- include("../includes/footer.ejs") %>

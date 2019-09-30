@@ -12,10 +12,10 @@ const adminRoutes = require('./routes/admin');
 const authRoutes = require('./routes/auth');
 const User = require('./models/user');
 
-const MONGODB_URL = "mongodb://localhost/pharmacy";
+const MONGODB_URI = "mongodb://localhost/pharmacy";
 const csrfProtection = csrf();
 const store = new MongoDBStore({
-        uri: MONGODB_URL,
+        uri: MONGODB_URI,
         collection: 'sessions'
     });
 const app = express();
@@ -42,7 +42,7 @@ app.use((req, res, next ) => {
     User.findById(req.session.user._id)
     .then( user => {
         req.user = user;
-        console.log(`==> User Logged In : ${req.user.email}`);
+        // console.log(`==> User Logged In : ${req.user.email}`);
         next();
     })
     .catch( err => {
@@ -65,7 +65,10 @@ app.use(pharmRoutes);
 app.use(errorController.get404);
 
 mongoose
-    .connect(MONGODB_URL, { useNewUrlParser: true })
+    .connect(MONGODB_URI, {
+        useNewUrlParser: true,
+        useFindAndModify: false
+        })
     .then( res => {
         app.listen(port, ()=>{
             console.log(`==> Server started at http://localhost:${port}/`);

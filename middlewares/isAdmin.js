@@ -1,6 +1,6 @@
 module.exports = (req, res, next ) => {
-    if(!req.session.user.isAdmin && !req.session.isLoggedIn) {
-        return res.redirect('/login');
+    if(!req.session.user.isAdmin) {
+        return res.redirect('/medicine-list');
     } else {
         next();
     }

@@ -5,7 +5,6 @@
     <body>
         <%- include("../includes/navBar.ejs") %>
         <main>
-            <h1>blah blah </h1>
             <% if (edit) { %>
                 <form action="/admin/medicine/<%= medicine.id %>" method="POST">
             <% } else { %>
