@@ -1,6 +1,7 @@
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const bodyParser = require('body-parser');
+const flash = require('connect-flash');
 const mongoose = require('mongoose');
 const express = require('express');
 const csrf = require('csurf');
@@ -35,6 +36,7 @@ app.use(
         })
     );
 app.use(csrfProtection);
+app.use(flash());
 app.use((req, res, next ) => {
     if (!req.session.user) {
         return next();
@@ -58,6 +60,7 @@ app.use((req, res, next)=>{
     res.locals.csrfToken = req.csrfToken();
     next();
 });
+
 app.use('/admin/',adminRoutes);
 app.use(authRoutes);
 app.use(pharmRoutes);

@@ -71,6 +71,20 @@ exports.postDeleteFromCart = (req, res) => {
     });
 }
 
+exports.getOrders = (req, res) => {
+    Order.find({ 'userId': req.user._id })
+    .then(orders => {
+        res.render('pharmacy/orders', {
+            orders: orders,
+            length: orders.length
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        res.redirect('/cart');
+    });
+};
+
 exports.placeOrder = (req, res) => {
     var amt = 0;
     req.user
@@ -141,10 +155,15 @@ exports.placeOrder = (req, res) => {
             subject: 'Order PLaced on ABC Pharmacy!',
             html: html
         };
-        return transporter.sendMail(mailOptions, function(error, info){
-            if (error) console.log(error);
-            else console.log(`Email sent - response: ${info.response}`);
-        })
+        return transporter.sendMail(mailOptions);
+    })
+    .then( (info, err) => {
+        if (err) {
+            console.log(err);
+            console.log(`Email Not Send!`);
+        } else {
+            console.log(`Email sent successfully: ${info.response}`);
+        }
     })
     .then( () => {
         req.user.clearCart()
@@ -172,17 +191,3 @@ exports.clearCart = (req, res) => {
         res.redirect('/cart');
     });
 }
-
-exports.getOrders = (req, res) => {
-    Order.find({ 'userId': req.user._id })
-    .then(orders => {
-        res.render('pharmacy/orders', {
-            orders: orders,
-            length: orders.length
-        });
-    })
-    .catch(err => {
-        console.log(err);
-        res.redirect('/cart');
-    });
-};

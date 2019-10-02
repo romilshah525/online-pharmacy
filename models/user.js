@@ -20,8 +20,20 @@ const userSchema = new Schema({
                     quantity: { type: Number, required: true }
                 }]
     }
+    // ,
+    // orders:{
+    //     order:[{
+    //         amount: { type: Number, required: true },
+    //         medicines: [
+    //             {
+    //                 medicine: { type: Object, required: true },
+    //                 quantity: { type: Number, required: true }
+    //             }
+    //         ]
+    //     }]
+    // }
 });
- 
+
 userSchema.methods.addToCart = function ( medicine ) { 
     const cartMedicineIndex = this.cart.items.findIndex( index => {
         return index.medicineId.toString() === medicine._id.toString();

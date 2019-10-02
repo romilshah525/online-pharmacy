@@ -9,8 +9,8 @@ router.get('/medicine-list', pharmacyController.getMedicineList);
 router.get('/cart', isAuth, pharmacyController.getCart);
 router.post('/add-to-cart', isAuth, pharmacyController.postAddToCart);
 router.post('/delete-from-cart/:medicineId', isAuth, pharmacyController.postDeleteFromCart);
+router.get('/orders', isAuth, pharmacyController.getOrders);
 router.get('/place-order', isAuth, pharmacyController.placeOrder);
 router.get('/clear-cart', isAuth, pharmacyController.clearCart);
-router.get('/orders', isAuth, pharmacyController.getOrders);
 
 module.exports = router;

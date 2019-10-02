@@ -76,8 +76,7 @@ exports.postAddMedicine = (req, res) => {
             price: price,
             medType: medType
         });
-    medicine
-    .save()
+    medicine.save()
     .then( med => {
         res.redirect('/admin/medicine-list');
     })

@@ -13,6 +13,11 @@
     <body>
         <%- include("../includes/navBar.ejs") %>
         <main>
+            <h3>
+                <% if (error) { %>
+                <%= error %>
+                <% } %>
+            </h3>
             <form action="/signup" method="post">
                 <label for="">Email</label>
                 <input type="email" name="email" autocomplete="username">
