@@ -29,6 +29,21 @@
                     </tr>
                     <% } %>
                 </table>
+                <div>
+                    <% if(currPageNo == 1) { %>
+                        <% if (prevPageNo !== currPageNo && currPageNo!== nextPageNo ) { %><a href="?page=<%=currPageNo%>"><%=currPageNo%></a><% } %>
+                        <% if (hasNextPage) { %><a href="?page=<%=nextPageNo%>"><%=nextPageNo%></a><% } %>
+                        <% if (hasNextNextPage) { %><a href="?page=<%=nextNextPageNo%>"><%=nextNextPageNo%></a><% } %>
+                    <% } else if( currPageNo == lastPageNo) { %>
+                        <% if (hasPrevPrevPage) { %><a href="?page=<%=prevPrevPageNo%>"><%=prevPrevPageNo%></a><% } %>
+                        <% if (hasPrevPage) { %><a href="?page=<%=prevPageNo%>"><%=prevPageNo%></a><% } %>
+                        <% if (prevPageNo !== currPageNo && currPageNo!== nextPageNo ) { %><a href="?page=<%=currPageNo%>"><%=currPageNo%></a><% } %>
+                    <% } else { %>
+                        <% if (hasPrevPage) { %><a href="?page=<%=prevPageNo%>"><%=prevPageNo%></a><% } %>
+                        <% if (prevPageNo !== currPageNo && currPageNo!== nextPageNo ) { %><a href="?page=<%=currPageNo%>"><%=currPageNo%></a><% } %>
+                        <% if (hasNextPage) { %><a href="?page=<%=nextPageNo%>"><%=nextPageNo%></a><% } %>
+                    <% } %>
+                </div>
             <% } else { %>
                 <h3>No Medicines Available!</h3>
             <% } %>

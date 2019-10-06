@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 
 const User = require('../models/user');
+const App = require('../app');
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -25,8 +26,13 @@ exports.getSignUp = (req, res) => {
 };
 
 exports.postSignUp = (req, res) => {
+    const name = req.body.name;
+    const gender = req.body.gender;
+    const age = req.body.age;
+    const address = req.body.address;
+    const contact = req.body.contact;
     const email = req.body.email;
-    const pwd = req.body.pwd;
+    const password = req.body.password;
     const salt = 12;
     let emailReceiver = email;
     let error = req.flash('error');
@@ -42,12 +48,15 @@ exports.postSignUp = (req, res) => {
             console.log('email already exists!');
             return res.redirect('/signup');
         }
-        console.log('email doenst exists!');
-        return bcrypt.hash(pwd, salt)
+        return bcrypt.hash(password, salt)
         .then( hashedPwd => {
             const user = new User({
+                name: name,
+                gender: gender,
+                age: age,
+                address: address,
+                contact: contact,
                 email: email,
-                pwd: pwd,
                 password: hashedPwd,
                 cart: {items:[]}
             });
@@ -97,14 +106,14 @@ exports.getLogin = (req, res) => {
 
 exports.postLogin = (req, res, next) => {
     const emailEntered = req.body.email;
-    const pwd = req.body.pwd;
+    const password = req.body.password;
     User.findOne({email: emailEntered})
     .then(user => {
         if(!user) {
             req.flash('error','email not registered !');
             return res.redirect('/login');
         }
-        bcrypt.compare(pwd, user.password)
+        bcrypt.compare(password, user.password)
         .then( isMatched => {
             if(isMatched) {
                 req.session.isLoggedIn = true;
@@ -171,7 +180,7 @@ exports.postResetPassword = (req, res) => {
                 subject: 'Reset Password',
                 html:`<h3>
                 Password Reset Link.
-                <a href="http://localhost:3000/reset-password/${token}">Click Here</a></h3>`
+                <a href="http://localhost:${App.port}/reset-password/${token}">Click Here</a></h3>`
             }
             return transporter.sendMail(mailOptions)
         })

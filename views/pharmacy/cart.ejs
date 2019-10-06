@@ -1,40 +1,53 @@
 <%- include('../includes/header.ejs') %>
         <title>ABC Pharmacy</title>
+        <script>
+            // function validate(e) {
+            //     if(document.getElementById('image').value) {
+            //         e.preventDefault();
+            //         console.log("Insert File!");
+            //     }
+            // }
+        </script>
     </head>
     <body>
         <%- include("../includes/navBar.ejs") %>
         <main>
             <h1>Your Cart</h1>
-                <% if (length > 0) { %>
-                    <table >
+            <% if (length > 0) { %>
+                <table >
+                    <tr>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                    <% let i = 0 %>
+                    <% for (let medicine of medicines) { %>
                         <tr>
-                            <th>Name</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
+                            <% i++ %>
+                            <td><%= medicine.medicineId.name %></td>
+                            <td><%= medicine.medicineId.price %></td>
+                            <form action="/" method="post">
+                            <!-- <form action="/delete-from-cart/<%= medicine.medicineId._id %>" method="post"> -->
+                                <td><label id="<%=i%>" name="medQty"><%= medicine.quantity %></td>
+                                <td><button type="submit">Delete From Cart</button></td>
+                                <!-- <td><button onclick="update(event, this.id)"><b>+</b></button></td>
+                                <td><button onclick="update(event, this.id)"><b>-</b></button></td> -->
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            </form>
                         </tr>
-                        <% let i = 0 %>
-                        <% for (let medicine of medicines) { %>
-                            <tr>
-                                <% i++ %>
-                                <td><%= medicine.medicineId.name %></td>
-                                <td><%= medicine.medicineId.price %></td>
-                                <form action="/delete-from-cart/<%= medicine.medicineId._id %>" method="post">
-                                    <td><label id="<%=i%>" name="medQty"><%= medicine.quantity %></td>
-                                    <td><button type="submit">Delete From Cart</button></td>
-                                    <!-- <td><button onclick="update(event, this.id)"><b>+</b></button></td>
-                                    <td><button onclick="update(event, this.id)"><b>-</b></button></td> -->
-                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                </form>
-                            </tr>
-                        <% } %>
-                    </table>
-                    <button><a href="/place-order">Order Now</a></button>
-                    <button><a href="/clear-cart">Clear Cart</a></button>
-                <% } else { %>
-                    <h3>No medicines added to the cart.
-                        <br>
-                        <a href="/medicine-list">Click here</a>to add medicines to cart.
-                    </h3>
-                <% } %>
+                    <% } %>
+                </table>
+                <button><a href="/clear-cart">Clear Cart</a></button>
+                <form action="/order" method="post" >
+                    <label for="image">Image</label>
+                    <input type="file" name="image" id="image" >
+                    <button type="submit">Order Now</button>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                </form>
+            <% } else { %>
+                <h3>No medicines added to the cart.<br />
+                    <a href="/medicine-list">Click here</a>to add medicines to cart.
+                </h3>
+            <% } %>
             </main>
     <%- include("../includes/footer.ejs") %>

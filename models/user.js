@@ -2,15 +2,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    // name: { type: String, required: true },
-    // gender: { type: String, required: true },
-    // dob: { type: Date, required: true },
-    // age: { type: Number, required: true },
-    // address: { type: String, required: true },
-    // contact: { type: Number, required: true },
+    name: { type: String, required: true },
+    gender: { type: String, required: true },
+    age: { type: Number, required: true },
+    address: { type: String, required: true },
+    contact: { type: Number, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    pwd: { type: String, required: true },
     isAdmin: { type: Boolean, default: false },
     resetToken: String,
     resetTokenExpirationDate: Date,
@@ -20,18 +18,6 @@ const userSchema = new Schema({
                     quantity: { type: Number, required: true }
                 }]
     }
-    // ,
-    // orders:{
-    //     order:[{
-    //         amount: { type: Number, required: true },
-    //         medicines: [
-    //             {
-    //                 medicine: { type: Object, required: true },
-    //                 quantity: { type: Number, required: true }
-    //             }
-    //         ]
-    //     }]
-    // }
 });
 
 userSchema.methods.addToCart = function ( medicine ) { 

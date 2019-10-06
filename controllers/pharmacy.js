@@ -2,6 +2,8 @@ const nodemailer = require('nodemailer');
 
 const Medicine = require('../models/medicine');
 const Order = require('../models/order');
+const ITEMS_PER_PAGE = 2;
+let total ;
 
 let transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -16,11 +18,29 @@ exports.getHome = (req, res) => {
 };
 
 exports.getMedicineList = (req, res) => {
+    const page =+ req.query.page || 1;
     Medicine.find()
+    .countDocuments()
+    .then( totalMed => {
+        total = totalMed;
+        return Medicine.find()
+            .skip((page-1)*(ITEMS_PER_PAGE))
+            .limit(ITEMS_PER_PAGE)
+    })
     .then( medicine => {
         res.render('pharmacy/med-list',{
             medicines: medicine,
-            length: medicine.length
+            length: medicine.length,
+            hasNextPage: ITEMS_PER_PAGE*page < total,
+            hasPrevPage: page > 1,
+            currPageNo: page,
+            prevPageNo: page - 1,
+            nextPageNo: page + 1,
+            hasNextNextPage: ITEMS_PER_PAGE*(page+1) < total,
+            nextNextPageNo: page + 2,
+            hasPrevPrevPage: page > 2,
+            prevPrevPageNo: page - 2,
+            lastPageNo:Math.ceil(total/ITEMS_PER_PAGE)
         });
     })
     .catch( err => {    
@@ -85,7 +105,7 @@ exports.getOrders = (req, res) => {
     });
 };
 
-exports.placeOrder = (req, res) => {
+exports.postOrder = (req, res) => {
     var amt = 0;
     req.user
     .populate('cart.items.medicineId')

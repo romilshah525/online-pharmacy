@@ -19,8 +19,9 @@ const store = new MongoDBStore({
         uri: MONGODB_URI,
         collection: 'sessions'
     });
+
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -81,3 +82,4 @@ mongoose
     });
 
 // "C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe" --dbpath "D:\Studies\Projects\Web Development (Node JS)\OnlinePharmacy\data"
+exports.port = port;

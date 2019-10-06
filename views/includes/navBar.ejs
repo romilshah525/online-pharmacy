@@ -2,6 +2,7 @@
     <nav>
         <ul>
             <li><a href="/" >Home</a></li>
+            <li><a href="/medicine-list" >Medicine List</a></li>
             <% if(!isAuthenticated) {%>
                 <li><a href="/signup" >Sign Up</a></li>
                 <li><a href="/login" >Log In</a></li>
@@ -11,7 +12,6 @@
                     <li><a href="/admin/medicine-list" >Admin Medicine List</a></li>
                     <li><a href="/admin/add-medicine" >Admin Add Medicine</a></li>
                 <% } else { %>
-                <li><a href="/medicine-list" >Medicine List</a></li>
                 <li><a href="/orders" >Orders</a></li>
                 <% } %>
                 <form action="/logout" method="post">
