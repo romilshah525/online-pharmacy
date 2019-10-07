@@ -3,13 +3,13 @@ const router = express.Router();
 
 const adminController = require('../controllers/admin');
 const isAdmin = require('../middlewares/isAdmin');
-const isAuth = require('../middlewares/isAuth');
+const isLoggedIn = require('../middlewares/isLoggedIn');
 
-router.get('/medicine-list', isAuth, isAdmin, adminController.getMedicineList);
-router.get('/medicine/:medId', isAuth, isAdmin, adminController.getEditMedicine);
-router.post('/medicine/:medId', isAuth, isAdmin, adminController.postEditMedicine);
-router.get('/add-medicine', isAuth, isAdmin, adminController.getAddMedicine);
-router.post('/add-medicine', isAuth, isAdmin, adminController.postAddMedicine);
-router.get('/delete-medicine/:medId', isAuth, isAdmin, adminController.deleteMedicine);
+router.get('/medicine-list', isLoggedIn, isAdmin, adminController.getMedicineList);
+router.get('/medicine/:medId', isLoggedIn, isAdmin, adminController.getEditMedicine);
+router.post('/medicine/:medId', isLoggedIn, isAdmin, adminController.postEditMedicine);
+router.get('/add-medicine', isLoggedIn, isAdmin, adminController.getAddMedicine);
+router.post('/add-medicine', isLoggedIn, isAdmin, adminController.postAddMedicine);
+router.get('/delete-medicine/:medId', isLoggedIn, isAdmin, adminController.deleteMedicine);
 
 module.exports = router;

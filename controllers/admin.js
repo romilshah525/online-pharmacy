@@ -39,8 +39,7 @@ exports.postEditMedicine = (req, res) => {
     Medicine.findById(id)
     .then( medicine => {
         medicine.name = name;
-        medicine.price = price;            
-        medicine.medType = medType ;
+        medicine.price = price;
         return medicine.save();
     })
     .then( medicine => {
@@ -62,7 +61,6 @@ exports.postAddMedicine = (req, res) => {
     const name = req.body.name;
     const expDate = req.body.expDate;
     const price = req.body.price;
-    const medType = req.body.medType;
     Medicine.findOne({name: name})
     .then( medicineDoc => {
         if(medicineDoc) {
@@ -73,8 +71,7 @@ exports.postAddMedicine = (req, res) => {
     const medicine = new Medicine ({
             name: name,
             expDate: expDate,
-            price: price,
-            medType: medType
+            price: price
         });
     medicine.save()
     .then( med => {

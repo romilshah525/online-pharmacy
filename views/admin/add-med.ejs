@@ -20,8 +20,6 @@
                 <% } %>
                 <label for="price">price</label>
                 <input type="text" name="price" value="<% if (edit) { %><%= medicine.price %><% } %>">
-                <label for="medType">medType</label>
-                <input type="text" name="medType" value="<% if (edit) { %><%= medicine.medType %><% } %>">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>"> <!-- name has to be _csrf -->
                 <button type="submit"><% if (edit) { %>Update Medicine<% } else { %>Add Medicine<% } %></button>
             </form>

@@ -4,20 +4,11 @@
     <body>
         <%- include("../includes/navBar.ejs") %>
         <main>
-            <h3>
-                <% if (error) { %>
-                    <%= error %>
-                    <% if(error.includes('email')) { %>
-                        <h4><a href="/signup">Click here</a>to register your email!</h4>
-                        <% } %>
-                <% } %>
-            </h3>
             <form action="/login" method="post">
                 <label for="">Email</label>
-                <input type="email" name="email" autocomplete="username">
+                <input type="text" name="username">
                 <label for="">Password</label>
-                <input type="password" name="password" autocomplete="password">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <input type="password" name="password">
                 <button type="submit">Login</button>
                 <button><a href="/reset-password">Forgot Password</a></button>
             </form>

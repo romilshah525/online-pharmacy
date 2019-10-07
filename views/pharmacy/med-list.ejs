@@ -10,18 +10,15 @@
                     <tr>
                         <th>Name</th>
                         <th>Price</th>
-                        <th>Medicine Type</th>
                         <th>Expiry Date</th>
                     </tr>
                     <% for (let medicine of medicines) { %>
                     <tr>
                         <td><%= medicine.name %></td>
                         <td><%= medicine.price %></td>
-                        <td><%= medicine.medType %></td>
                         <td><%= medicine.expDate.getDate() +"/" + (medicine.expDate.getMonth()+1) + "/" +medicine.expDate.getFullYear() %></td>
                         <td>
                             <form method="post" action="/add-to-cart">
-                                <input type="hidden" name="_csrf" value="<%= csrfToken %>"> <!-- name has to be _csrf -->
                                 <button>Add To Cart</button>
                                 <input type="hidden" name="medId" value="<%= medicine.id %>">
                             </form>

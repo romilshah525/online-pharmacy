@@ -10,14 +10,12 @@
                     <tr>
                         <th>Name</th>
                         <th>Price</th>
-                        <th>Medicine Type</th>
                         <th>Expiry Date</th>
                     </tr>
                     <% for (let medicine of medicines) { %>
                     <tr>
                         <td><%= medicine.name %></td>
                         <td><%= medicine.price %></td>
-                        <td><%= medicine.medType %></td>
                         <td><%= medicine.expDate.getDate() +"/" + (medicine.expDate.getMonth()+1) + "/" +medicine.expDate.getFullYear() %></td>
                         <td>
                             <button><a href="/admin/medicine/<%= medicine.id %>?edit=true">Edit Medicine</a></button>
@@ -28,6 +26,21 @@
                     </tr>
                     <% } %>
                 </table>
+                <div>
+                    <% if(currPageNo == 1) { %>
+                        <% if (prevPageNo !== currPageNo && currPageNo!== nextPageNo ) { %><a href="?page=<%=currPageNo%>"><%=currPageNo%></a><% } %>
+                        <% if (hasNextPage) { %><a href="?page=<%=nextPageNo%>"><%=nextPageNo%></a><% } %>
+                        <% if (hasNextNextPage) { %><a href="?page=<%=nextNextPageNo%>"><%=nextNextPageNo%></a><% } %>
+                    <% } else if( currPageNo == lastPageNo) { %>
+                        <% if (hasPrevPrevPage) { %><a href="?page=<%=prevPrevPageNo%>"><%=prevPrevPageNo%></a><% } %>
+                        <% if (hasPrevPage) { %><a href="?page=<%=prevPageNo%>"><%=prevPageNo%></a><% } %>
+                        <% if (prevPageNo !== currPageNo && currPageNo!== nextPageNo ) { %><a href="?page=<%=currPageNo%>"><%=currPageNo%></a><% } %>
+                    <% } else { %>
+                        <% if (hasPrevPage) { %><a href="?page=<%=prevPageNo%>"><%=prevPageNo%></a><% } %>
+                        <% if (prevPageNo !== currPageNo && currPageNo!== nextPageNo ) { %><a href="?page=<%=currPageNo%>"><%=currPageNo%></a><% } %>
+                        <% if (hasNextPage) { %><a href="?page=<%=nextPageNo%>"><%=nextPageNo%></a><% } %>
+                    <% } %>
+                </div>
             <% } else { %>
                 <h3>No Medicines Available!</h3>
             <% } %>
