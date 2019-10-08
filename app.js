@@ -31,6 +31,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: false}));
+
 app.use(flash());
 app.use((req, res, next) => {
     if(req.user){
@@ -51,7 +52,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.post('/login', passport.authenticate('local', {
-    successRedirect: '/cart',
+    successRedirect: '/',
     failureRedirect: '/login'
     }), function(req, res) {
         res.redirect('/medicine-list');

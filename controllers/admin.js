@@ -15,6 +15,7 @@ exports.getEditMedicine = (req, res) => {
     })
     .catch( err => {
         console.log(err);
+        req.flash('err','Couldn\'t load the page');
         res.redirect('/medicine-list');
     });
 };
@@ -35,6 +36,7 @@ exports.postEditMedicine = (req, res) => {
     })
     .catch( err => {
         console.log(err);
+        req.flash('err','Couldn\'t save the changes');
         res.redirect('/medicine-list');
     });
 };
@@ -53,6 +55,7 @@ exports.postAddMedicine = (req, res) => {
     .then( medicineDoc => {
         if(medicineDoc) {
             console.log(`${medicineDoc} already exists!`);
+            req.flash('err','Medicine already exists!');
             return res.redirect('/add-medicine');
         }
     });
@@ -80,6 +83,7 @@ exports.deleteMedicine = (req, res) => {
     })
     .catch( err => {
         console.log(err);
+        req.flash('err','Couldn\'t load the page');
         res.redirect('/medicine-list');
     });
 };

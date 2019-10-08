@@ -1,8 +1,7 @@
-const crypto = require('crypto');
-const nodemailer = require('nodemailer');
 const passportLocalMongoose = require('passport-local-mongoose');
 const localStrategy =  require('passport-local');
 const session = require('express-session');
+const nodemailer = require('nodemailer');
 const flash = require('connect-flash');
 const passport = require('passport');
 
@@ -44,7 +43,7 @@ exports.postSignUp = (req, res) => {
         req.body.password,
         function(err, user) {
             if(err) {
-                req.flash('error','enter he credentials carefully!')
+                req.flash('error','Enter valid credentials!');
                 console.log(`Error:${err}`);
                 return res.redirect('/signup');
             }
@@ -66,6 +65,7 @@ exports.postSignUp = (req, res) => {
                     }
                     res.redirect('/login');
                 });
+                    res.redirect('/login');
             });
         }
     );
@@ -79,7 +79,8 @@ exports.postLogin = (req, res) => {
     passport.authenticate('local', {
         successRedirect: '/',
         failureRedirect: '/login',
-        failureFlash: 'Invalid Username or Password!'
+        failureFlash: 'Invalid Username or Password!',
+        req.flash('error','Enter valid credentials!')
     }), function(req, res) {
         res.redirect('/medicine-list');
     }

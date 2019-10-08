@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const orderSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
     amount: { type: Number, required: true },
+    imageUrl: {type: String, reqired: true},
     medicines: [{
         medicine: { type: Object, required: true },
         quantity: { type: Number, required: true }

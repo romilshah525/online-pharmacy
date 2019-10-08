@@ -23,9 +23,7 @@ exports.getMedicineList = (req, res) => {
     .countDocuments()
     .then( totalMed => {
         total = totalMed;
-        return Medicine.find()
-            .skip((page-1)*(ITEMS_PER_PAGE))
-            .limit(ITEMS_PER_PAGE)
+        return Medicine.find().skip((page-1)*(ITEMS_PER_PAGE)).limit(ITEMS_PER_PAGE)
     })
     .then( medicine => {
         res.render('pharmacy/med-list',{
@@ -45,6 +43,7 @@ exports.getMedicineList = (req, res) => {
     })
     .catch( err => {    
         console.log(err);
+        req.flash('error','Could not load the page');
         res.redirect('/');
     });
 };
@@ -60,7 +59,11 @@ exports.getCart = (req, res) => {
             medicines: medicines
         });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        console.log(err);
+        req.flash('error','Could not load the page');
+        res.redirect('/');
+    });
 };
 
 exports.getAddToCart = (req, res) => {
@@ -74,6 +77,7 @@ exports.getAddToCart = (req, res) => {
     })
     .catch( err => {
         console.log(`Error: ${err}`);
+        req.flash('error','Could not add to cart!');
         res.redirect('/cart');
     });
 };
@@ -86,7 +90,7 @@ exports.postDeleteFromCart = (req, res) => {
         res.redirect('/cart');
     })
     .catch( err => {
-        console.log(`Error: ${err}`);
+        req.flash('error','Could not delete from the cart!');
         res.redirect('/cart');
     });
 }
@@ -101,12 +105,19 @@ exports.getOrders = (req, res) => {
     })
     .catch(err => {
         console.log(err);
+        req.flash('error','Could not get the orders');
         res.redirect('/cart');
     });
 };
 
 exports.postOrder = (req, res) => {
     var amt = 0;
+    const image = req.file;
+    if(!image) {
+        req.flash('error','Attach an image');
+        return res.render('/cart');
+    }
+    const imageUrl = image.path;
     req.user
     .populate('cart.items.medicineId')
     .execPopulate()
@@ -121,8 +132,9 @@ exports.postOrder = (req, res) => {
         });
         const order = new Order({
             userId: req.user,
-            medicines: medicines,
-            amount: amt
+            medicines,
+            amount: amt,
+            imageUrl
         });
         return order.save();
     })
@@ -192,11 +204,13 @@ exports.postOrder = (req, res) => {
         })
         .catch((resp) => {
             console.log(`Failure: ${resp}`);
+            req.flash('error','Unknwn error');
             res.redirect('/cart');
         });
     })
     .catch(err => {
         console.log(err);
+        req.flash('error','Could not load the page');
         res.redirect('/cart');
     });
 }
@@ -208,6 +222,7 @@ exports.clearCart = (req, res) => {
     })
     .catch((resp) => {
         console.log(`Failure: ${resp}`);
+        req.flash('error','Could not load the page');
         res.redirect('/cart');
     });
 }

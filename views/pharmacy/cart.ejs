@@ -37,7 +37,7 @@
                     <% } %>
                 </table>
                 <button><a href="/clear-cart">Clear Cart</a></button>
-                <form action="/order" method="post" >
+                <form action="/order" method="post" enctype="multipart/form-data">
                     <label for="image">Image</label>
                     <input type="file" name="image" id="image" >
                     <button type="submit">Order Now</button>
