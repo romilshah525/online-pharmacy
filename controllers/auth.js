@@ -1,6 +1,6 @@
 // const crypto = require('crypto');
 // const bcrypt = require('bcryptjs');
-// const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
 const passportLocalMongoose = require('passport-local-mongoose');
 const localStrategy =  require('passport-local');
 const session = require('express-session');
@@ -10,16 +10,17 @@ const passport = require('passport');
 const User = require('../models/user');
 const App = require('../app');
 
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'shahromil525@gmail.com',
+        pass: 'rldegzyqjsqirwpf'
+    }   
+});
+
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-// const transporter = nodemailer.createTransport({
-//     service: 'gmail',
-//     auth: {
-//         user: 'shahromil525@gmail.com',
-//         pass: 'rldegzyqjsqirwpf'
-//     }   
-// });
 
 // exports.getSignUp = (req, res) => {
 //     let error = req.flash('error');
@@ -287,8 +288,21 @@ exports.getSignUp = (req, res) => {
 
 exports.postSignUp = (req, res) => {
     req.body.username
-    req.body.password
-    User.register( new User({ username: req.body.username }),req.body.password,
+    req.body.name
+    req.body.gender
+    req.body.address
+    req.body.age
+    req.body.contact
+    const email = req.body.email
+    User.register( new User({
+        username: req.body.username,
+        name: req.body.name,
+        gender: req.body.gender,
+        address: req.body.address,
+        age: req.body.age,
+        contact: req.body.contact,
+         }),
+        req.body.password,
         function(err, user) {
             if(err) {
                 console.log(`Error:${err}`);
@@ -296,10 +310,26 @@ exports.postSignUp = (req, res) => {
             }
             console.log(`User:${user}`);
             passport.authenticate('local')(req, res, function(){
-                res.redirect('/login');
-            }
-        );
-    });
+                console.log(`${user.username}`);
+                
+                let mailOptions = {
+                    from: 'shahromil525@gmail.com',
+                    to: user.username,
+                    subject: 'Email Registered on ABC Pharmacy!',
+                    text: 'Hey there, your account has been created!\n\nYour Username is ${user.username}'
+                };
+                transporter.sendMail(mailOptions, (err, info) => {
+                    if (err) {
+                        console.log(`Email Not Send!\n`);
+                        console.log(err);
+                    } else {
+                        console.log(`Email sent successfully: ${info.response}`);
+                    }
+                    res.redirect('/login');
+                });
+            });
+        }
+    );
 };
 
 exports.getLogin = (req, res) => {

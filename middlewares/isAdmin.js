@@ -1,8 +1,6 @@
 module.exports = (req, res, next ) => {
-    if(!req.session.user.isAdmin) {
-        return res.redirect('/medicine-list');
+    if(req.user.isAdmin) {
+        return next();
     }
-    else {
-        next();
-    }
+    res.redirect('/medicine-list');
 }

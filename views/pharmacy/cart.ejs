@@ -32,7 +32,6 @@
                                 <td><button type="submit">Delete From Cart</button></td>
                                 <!-- <td><button onclick="update(event, this.id)"><b>+</b></button></td>
                                 <td><button onclick="update(event, this.id)"><b>-</b></button></td> -->
-                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                             </form>
                         </tr>
                     <% } %>
@@ -42,7 +41,6 @@
                     <label for="image">Image</label>
                     <input type="file" name="image" id="image" >
                     <button type="submit">Order Now</button>
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 </form>
             <% } else { %>
                 <h3>No medicines added to the cart.<br />

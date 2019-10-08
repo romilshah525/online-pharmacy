@@ -16,7 +16,7 @@ const User = require('./models/user');
 
 const MONGODB_URI = "mongodb://localhost/pharmacy";
 const app = express();
-const port = 3001;
+const port = 3000;
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -32,6 +32,15 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(flash());
+app.use((req, res, next) => {
+    res.locals.isAuthenticated = req.user || false;
+    if(res.locals.isAuthenticated) {
+        res.locals.isAdmin = req.user.isAdmin;
+    } else {
+        res.locals.isAdmin = false;
+    }
+    next();
+});
 
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());

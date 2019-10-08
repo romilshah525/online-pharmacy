@@ -171,7 +171,7 @@ exports.postOrder = (req, res) => {
                 </html>`;
         let mailOptions = {
             from: 'shahromil525@gmail.com',
-            to: req.user.email,
+            to: req.user.username,
             subject: 'Order PLaced on ABC Pharmacy!',
             html: html
         };
