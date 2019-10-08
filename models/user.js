@@ -58,16 +58,3 @@ userSchema.methods.clearCart = function() {
 
 userSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model('User', userSchema);
-
-// const userSchema = new Schema({
-//     name: { type: String, required: true },
-//     gender: { type: String, required: true },
-//     age: { type: Number, required: true },
-//     address: { type: String, required: true },
-//     contact: { type: Number, required: true },
-//     email: { type: String, required: true },
-//     password: { type: String, required: true },
-//     isAdmin: { type: Boolean, default: false },
-//     resetToken: String,
-//     resetTokenExpirationDate: Date
-// });

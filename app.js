@@ -33,7 +33,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(flash());
 app.use((req, res, next) => {
-    res.locals.isAuthenticated = req.user || false;
+    if(req.user){
+        res.locals.isAuthenticated = req.user.username;
+    } else {
+        res.locals.isAuthenticated = false;
+    }
     if(res.locals.isAuthenticated) {
         res.locals.isAdmin = req.user.isAdmin;
     } else {

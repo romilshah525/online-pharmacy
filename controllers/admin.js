@@ -3,39 +3,6 @@ const Medicine = require('../models/medicine');
 const ITEMS_PER_PAGE = 2;
 let total ;
 
-exports.getMedicineList = (req, res) => {
-    const page =+ req.query.page || 1;
-    Medicine.find()
-    .countDocuments()
-    .then( totalMed => {
-        total = totalMed;
-        return Medicine.find()
-            .skip((page-1)*(ITEMS_PER_PAGE))
-            .limit(ITEMS_PER_PAGE)
-    })
-    .then( medicine => {
-        res.render('admin/med-list',{
-            medicines: medicine,
-            length: medicine.length,
-            admin: true,
-            hasNextPage: ITEMS_PER_PAGE*page < total,
-            hasPrevPage: page > 1,
-            currPageNo: page,
-            prevPageNo: page - 1,
-            nextPageNo: page + 1,
-            hasNextNextPage: ITEMS_PER_PAGE*(page+1) < total,
-            nextNextPageNo: page + 2,
-            hasPrevPrevPage: page > 2,
-            prevPrevPageNo: page - 2,
-            lastPageNo:Math.ceil(total/ITEMS_PER_PAGE)
-        });
-    })
-    .catch( err => {    
-        console.log(err);
-        res.redirect('/');
-    });
-};
-
 exports.getEditMedicine = (req, res) => {
     const id = req.params.medId;
     const edit = req.query.edit;
@@ -48,7 +15,7 @@ exports.getEditMedicine = (req, res) => {
     })
     .catch( err => {
         console.log(err);
-        res.redirect('/admin/medicine-list');
+        res.redirect('/medicine-list');
     });
 };
 
@@ -64,11 +31,11 @@ exports.postEditMedicine = (req, res) => {
         return medicine.save();
     })
     .then( medicine => {
-        res.redirect('/admin/medicine-list');
+        res.redirect('/medicine-list');
     })
     .catch( err => {
         console.log(err);
-        res.redirect('/admin/medicine-list');
+        res.redirect('/medicine-list');
     });
 };
 
@@ -96,10 +63,11 @@ exports.postAddMedicine = (req, res) => {
         });
     medicine.save()
     .then( med => {
-        res.redirect('/admin/medicine-list');
+        res.redirect('/medicine-list');
     })
     .catch(err => {
         console.log(err);
+        req.flash('error','Error while uploading!');
         res.redirect('/admin/add-medicine');
     });
 };
@@ -108,10 +76,10 @@ exports.deleteMedicine = (req, res) => {
     const id = req.params.medId;
     Medicine.findByIdAndRemove(id)
     .then( medicine => {
-        res.redirect('/admin/medicine-list');
+        res.redirect('/medicine-list');
     })
     .catch( err => {
         console.log(err);
-        res.redirect('/admin/medicine-list');
+        res.redirect('/medicine-list');
     });
 };

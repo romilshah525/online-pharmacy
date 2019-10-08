@@ -1,5 +1,4 @@
-// const crypto = require('crypto');
-// const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const passportLocalMongoose = require('passport-local-mongoose');
 const localStrategy =  require('passport-local');
@@ -22,152 +21,74 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// exports.getSignUp = (req, res) => {
-//     let error = req.flash('error');
-//     if(error.length > 0) {
-//         error = error[0];
-//     } else {
-//         error = null;
-//     }
-//     res.render('auth/signup',{
-//         error: error
-//     });
-// };
+exports.getSignUp = (req, res) => {
+    res.render('auth/signup');
+};
 
-// exports.postSignUp = (req, res) => {
-//     // const name = req.body.name;
-//     // const gender = req.body.gender;
-//     // const age = req.body.age;
-//     // const address = req.body.address;
-//     // const contact = req.body.contact;
-//     const email = req.body.email;
-//     const password = req.body.password;
-//     const salt = 12;
-//     let emailReceiver = email;
-//     let error = req.flash('error');
-//     if(error.length > 0) {
-//         error = error[0];
-//     } else {
-//         error = null;
-//     }
-//     console.log(`User Email:${emailReceiver}-Password:${password}`);
-//     // User.findOne({email: email})
-//     // .then( userDoc => {
-//     //     if(userDoc) {
-//     //         req.flash('error','email already exists!');
-//     //         console.log('email already exists!');
-//     //         return res.redirect('/signup');
-//     //     }
-//         User.register(new User({username: email}), password, (err, user) => {
-//             if(err){
-//                 console.log(`Error:${err}`);
-//                 return res.redirect('/signup');
-//             }
-//                 // passport.authenticate('local')(req, res, () => {
-//                 res.redirect('/login');
-//             // });
-//         });
-//     //     return bcrypt.hash(password, salt)
-//     //     .then( hashedPwd => {
-//     //         const user = new User({
-//     //             name: name,
-//     //             gender: gender,
-//     //             age: age,
-//     //             address: address,
-//     //             contact: contact,
-//     //             email: email,
-//     //             password: hashedPwd,
-//     //             cart: {items:[]}
-//     //         });
-//     //         return user.save();
-//     //     })
-//     //     .then( ( user) => {
-//     //         console.log(`user:${user}`);
-//     //         console.log(`Sending Mail!`);
-//     //         let mailOptions = {
-//     //             from: 'shahromil525@gmail.com',
-//     //             to: emailReceiver,
-//     //             subject: 'Email Registered on ABC Pharmacy!',
-//     //             text: 'Hey there, your account has been created!'
-//     //         };
-//     //         return transporter.sendMail(mailOptions);
-//     //     })
-//     //     .then( (info, err) => {
-//     //         if (err) {
-//     //             console.log(`Email Not Send!\n`);
-//     //             console.log(err);
-//     //         } else {
-//     //             console.log(`Email sent successfully: ${info.response}`);
-//     //         }
-//     //         res.redirect('/login');
-//     //     })
-//     //     .catch(err => {
-//     //         console.log(err);
-//     //     });
-//     // })
-//     // .catch(err => {
-//     //     console.log(`Error:${err}`);
-//     //     res.redirect('/');
-//     // });
-// };
+exports.postSignUp = (req, res) => {
+    req.body.username
+    req.body.name
+    req.body.gender
+    req.body.address
+    req.body.age
+    req.body.contact
+    const email = req.body.email
+    User.register( new User({
+        username: req.body.username,
+        name: req.body.name,
+        gender: req.body.gender,
+        address: req.body.address,
+        age: req.body.age,
+        contact: req.body.contact,
+         }),
+        req.body.password,
+        function(err, user) {
+            if(err) {
+                req.flash('error','enter he credentials carefully!')
+                console.log(`Error:${err}`);
+                return res.redirect('/signup');
+            }
+            console.log(`User Saved Details:${user}`);
+            passport.authenticate('local')(req, res, function(){
+                console.log(`Sending mail to : ${user.username}...\n`);
+                let mailOptions = {
+                    from: 'shahromil525@gmail.com',
+                    to: user.username,
+                    subject: 'Email Registered on ABC Pharmacy!',
+                    text: `Hey there, your account has been created!\n\nYour Username is ${user.username}`
+                };
+                transporter.sendMail(mailOptions, (err, info) => {
+                    if (err) {
+                        console.log(`Email Not Send!\n`);
+                        console.log(err);
+                    } else {
+                        console.log(`Email sent successfully: ${info.response}`);
+                    }
+                    res.redirect('/login');
+                });
+            });
+        }
+    );
+};
 
-// exports.getLogin = (req, res) => {
-//     let error = req.flash('error');
-//     if(error.length > 0) {
-//         error = error[0];
-//     } else {
-//         error = null;
-//     }
-//     res.render('auth/login',{
-//         error: error
-//     });
-// };
+exports.getLogin = (req, res) => {
+    res.render("auth/login");
+};
 
-// exports.postLogin = (req, res, next) => {
-//     const emailEntered = req.body.email;
-//     const password = req.body.password;
-//     // User.findOne({email: emailEntered})
-//     // User.findOne({username: emailEntered})
-//     // .then(user => {
-//     //     if(!user) {
-//     //         req.flash('error','email not registered !');
-//     //         return res.redirect('/login');
-//     //     }
-//         // bcrypt.compare(password, user.password)
-//         // .then( isMatched => {
-//         //     if(isMatched) {
-//         //         req.session.isLoggedIn = true;
-//         //         req.session.user = user;
-//         //         return req.session.save(err => {
-//         //             if(err) console.log(err);
-//         //             res.redirect('/');
-//         //         });
-//         //     }
-//         //     req.flash('error','invalid password');
-//         //     res.redirect('/login');
-//         // })
-//         // .catch(err => {
-//         //     console.log(err);
-//         //     res.redirect('/login');
-//         // });
-//             passport.authenticate('local', {
-//                 successRedirect: '/',
-//                 failureRedirect: '/login'
-//         }), (req, res) => {};
-//     // })
-//     // .catch(err => console.log(err));
-// };
+exports.postLogin = (req, res) => {
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: 'Invalid Username or Password!'
+    }), function(req, res) {
+        res.redirect('/medicine-list');
+    }
+}
 
-// exports.postLogout = (req, res, next) => {
-//     // req.session.destroy(err => {
-//     //     if(err) {
-//     //         console.log(err);
-//     //     }
-//     //     res.redirect('/');
-//     // });
-//     req.logout();
-//     res.redirect('/');
-// };
+exports.getLogout = (req, res) => {
+    req.logout();
+    res.redirect('/');
+};
 
 // exports.getResetPassword = (req, res) => {
 //     let error = req.flash('error');
@@ -281,71 +202,3 @@ passport.deserializeUser(User.deserializeUser());
 //         res.redirect('/reset-password');
 //     });
 // }
-
-exports.getSignUp = (req, res) => {
-    res.render('auth/signup');
-};
-
-exports.postSignUp = (req, res) => {
-    req.body.username
-    req.body.name
-    req.body.gender
-    req.body.address
-    req.body.age
-    req.body.contact
-    const email = req.body.email
-    User.register( new User({
-        username: req.body.username,
-        name: req.body.name,
-        gender: req.body.gender,
-        address: req.body.address,
-        age: req.body.age,
-        contact: req.body.contact,
-         }),
-        req.body.password,
-        function(err, user) {
-            if(err) {
-                console.log(`Error:${err}`);
-                return res.redirect('/signup');
-            }
-            console.log(`User:${user}`);
-            passport.authenticate('local')(req, res, function(){
-                console.log(`${user.username}`);
-                
-                let mailOptions = {
-                    from: 'shahromil525@gmail.com',
-                    to: user.username,
-                    subject: 'Email Registered on ABC Pharmacy!',
-                    text: 'Hey there, your account has been created!\n\nYour Username is ${user.username}'
-                };
-                transporter.sendMail(mailOptions, (err, info) => {
-                    if (err) {
-                        console.log(`Email Not Send!\n`);
-                        console.log(err);
-                    } else {
-                        console.log(`Email sent successfully: ${info.response}`);
-                    }
-                    res.redirect('/login');
-                });
-            });
-        }
-    );
-};
-
-exports.getLogin = (req, res) => {
-    res.render("auth/login");
-};
-
-exports.postLogin = (req, res) => {
-    passport.authenticate('local', {
-        successRedirect: '/cart',
-        failureRedirect: '/login'
-    }), function(req, res) {
-        res.redirect('/medicine-list');
-    }
-}
-
-exports.getLogout = (req, res) => {
-    req.logout();
-    res.redirect('/');
-};

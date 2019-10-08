@@ -4,20 +4,20 @@
             <li><a href="/" >Home</a></li>
             <% console.log(`LoggedIn:${isAuthenticated}`);%>
             <% console.log(`Admin:${isAdmin}`);%>
+            <li><a href="/medicine-list" >Medicine List</a></li>
             <% if(!isAuthenticated) { %>
                 <li><a href="/signup" >Sign Up</a></li>
                 <li><a href="/login" >Log In</a></li>
-                <li><a href="/medicine-list" >Medicine List</a></li>
             <% } else if(isAuthenticated && isAdmin) { %>
-                <li><a href="/admin/medicine-list" >Medicine List</a></li>
                 <li><a href="/admin/add-medicine" >Add Medicine</a></li>
+                <li><a href="/cart">My Cart</a></li>
+                <li><a href="/orders" >Orders</a></li>
                 <li><a href="/logout" >Log Out</a></li>
             <% } else { %>
-                    <li><a href="/medicine-list" >Medicine List</a></li>
-                    <li><a href="/logout" >Log Out</a></li>
+                <li><a href="/cart">My Cart</a></li>
+                <li><a href="/orders" >Orders</a></li>
+                <li><a href="/logout" >Log Out</a></li>
             <% } %>
-            <li><a href="/cart">My Cart</a></li>
-            <li><a href="/orders" >Orders</a></li>
         </ul>
     </nav>
 </header>

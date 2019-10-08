@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 const Medicine = require('../models/medicine');
 const Order = require('../models/order');
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 5;
 let total ;
 
 let transporter = nodemailer.createTransport({
@@ -63,8 +63,8 @@ exports.getCart = (req, res) => {
     .catch(err => console.log(err));
 };
 
-exports.postAddToCart = (req, res) => {
-    const medId = req.body.medId;
+exports.getAddToCart = (req, res) => {
+    const medId = req.params.medId;
     Medicine.findById(medId)
     .then( medicine => {
         return req.user.addToCart(medicine);

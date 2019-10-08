@@ -7,7 +7,7 @@ const isLoggedIn = require('../middlewares/isLoggedIn');
 router.get('/', pharmacyController.getHome);
 router.get('/medicine-list', pharmacyController.getMedicineList);
 router.get('/cart', isLoggedIn, pharmacyController.getCart);
-router.post('/add-to-cart', isLoggedIn, pharmacyController.postAddToCart);
+router.get('/add-to-cart/:medId', isLoggedIn, pharmacyController.getAddToCart);
 router.post('/delete-from-cart/:medicineId', isLoggedIn, pharmacyController.postDeleteFromCart);
 router.get('/orders', isLoggedIn, pharmacyController.getOrders);
 router.post('/order', isLoggedIn, pharmacyController.postOrder);

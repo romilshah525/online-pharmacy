@@ -11,11 +11,3 @@ const orderSchema = new Schema({
 });
 
 module.exports = mongoose.model('Order', orderSchema);
-
-// const orderSchema = new Schema({
-//     userId: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-//     amount: { type: Number, required: true },
-//     medicines: [{
-//         cartId: { type: Schema.Types.ObjectId, required: true, ref: 'Cart' },
-//     }]
-// });

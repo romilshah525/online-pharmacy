@@ -18,13 +18,19 @@
                         <td><%= medicine.price %></td>
                         <td><%= medicine.expDate.getDate() +"/" + (medicine.expDate.getMonth()+1) + "/" +medicine.expDate.getFullYear() %></td>
                         <td>
-                            <form method="post" action="/add-to-cart">
-                                <button>Add To Cart</button>
-                                <input type="hidden" name="medId" value="<%= medicine.id %>">
-                            </form>
+                            <button id="delete"><a href="/add-to-cart/<%= medicine.id %>">Add To Cart (New)</a></button>
                         </td>
+                        <% if (isAdmin) { %>
+                            <td>
+                                <button><a href="/admin/medicine/<%= medicine.id %>?edit=true">Edit Medicine</a></button>
+                            </td>
+                            <td>
+                                <button><a href="/admin/delete-medicine/<%= medicine.id %>">Delete Medicine</a></button>
+                            </td>
+                        <% } %>
                     </tr>
                     <% } %>
+                    <input type="hidden" name="" id="medId" value="">
                 </table>
                 <div>
                     <% if(currPageNo == 1) { %>
