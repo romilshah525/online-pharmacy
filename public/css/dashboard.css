@@ -1,5 +1,299 @@
-body{
-    background-color: burlywood;
-    margin: 0%;
-    padding: 0%;
+* {margin: 0; padding: 0; outline: 0;}
+
+
+body {
+    font-family: Roboto, sans-serif;
+    color: rgb(43, 42, 42);
+    font-size: 12px;
+    background:#fff;
+
+
 }
+
+
+h1, h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    margin:0 0 15px 0;
+}
+
+
+h1 {
+    font-size: 36px;
+    letter-spacing: -2px;
+    line-height: 100%;
+}
+
+h1.title {
+    font-size: 46px;
+    font-weight: 700;
+    color: #6a6a6a;
+
+
+}
+
+
+h2 {
+    font-size: 24px;
+}
+
+p {
+    margin: 0 0 15px 0;
+}
+
+.menuBtn {
+
+    background: center center no-repeat transparent;
+    background: #000;
+    display: block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 10px;
+
+}
+
+.clear {
+    clear: both;
+}
+.wrap {
+        /*background:url(../images/bg.png) top left repeat-x;*/
+        width: 100%;
+        max-width: 1140px;
+        min-width: 960px;
+        z-index: 10;
+        position: relative;
+        margin: 0 auto;
+        padding: 0;
+
+}
+
+
+
+.section {
+    width: 100%;
+    max-width: 1140px;
+    min-width: 960px;
+    z-index: 10;
+    position: relative;
+    margin: 0 auto;
+    padding: 0 0 20px 0;
+}
+
+
+.inner {
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
+    min-height: 50px;
+    padding:30px 0;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    padding:30px 0;
+}
+
+.subMenu {
+    position: absolute;
+    top: 462px;
+    height: 70px;
+    z-index: 1000;
+    width: 100%;
+    max-width: 1140px;
+    min-width: 960px;
+    background: #10847e;
+
+}
+
+.subMenu .inner {
+    padding-top:10px;
+    font-weight: 400;
+}
+
+
+
+
+
+.subNavBtn {
+    display: block;
+    height: 35px;
+    width: 12%;
+    float:left;
+    margin: 0px 0px 0 0;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 15px 2% 0 2%;
+    text-align: center;
+    color: #fff;
+}
+
+.end {
+    margin: 0;
+}
+
+
+/* SECTIONS */
+.sTop {
+    min-height: 630px;
+    background:#e5e5e5;
+    color:#fff;
+    background-image: url("https://wallpapercave.com/wp/wp1931858.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width:100%;
+}
+
+
+
+.s1 {
+    min-height: 500px;
+    background: #fff;
+}
+
+
+.s2 {
+    min-height: 500px;
+    background: #fff;
+}
+
+
+.s3 {
+    min-height: 500px;
+    background: #fff;
+}
+
+
+.s4 {
+    min-height: 500px;
+    background: #fff;
+    /* color: white; */
+}
+
+/* .s5 {
+    min-height: 500px;
+    background: ##FFF8E7;
+    color: white; */
+
+    .flex-container {
+      display: flex;
+      background-color: #fff;
+    }
+    
+    .flex-container > div {
+      background-color: #fff;
+      margin: 10px;
+      /* padding: 20px; */
+      /* font-size: 30px; */
+    }
+
+    section#contact {
+      background-color: rgb(204, 204, 204);
+      /* background-image: url("https://ichef.bbci.co.uk/news/660/cpsprodpb/11421/production/_104898607_gettyimages-878852718.jpg"); */
+      background-position: center;
+      background-repeat: no-repeat;
+  }
+  
+  section#contact .section-heading {
+      color: #fff;
+  }
+  
+  section#contact .form-group {
+      margin-bottom: 25px;
+  }
+  
+  section#contact .form-group input,
+  section#contact .form-group textarea {
+      padding: 20px;
+  }
+  
+  section#contact .form-group input.form-control {
+      height: auto;
+  }
+  
+  section#contact .form-group textarea.form-control {
+      height: 236px;
+  }
+  
+  section#contact .form-control:focus {
+      border-color: #10847e;
+      box-shadow: none;
+  }
+  
+  section#contact::-webkit-input-placeholder {
+      text-transform: uppercase;
+      font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+      font-weight: 700;
+      color: #bbb;
+  }
+  
+  section#contact:-moz-placeholder {
+      text-transform: uppercase;
+      font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+      font-weight: 700;
+      color: #bbb;
+  }
+  
+  section#contact::-moz-placeholder {
+      text-transform: uppercase;
+      font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+      font-weight: 700;
+      color: #bbb;
+  }
+  
+  section#contact:-ms-input-placeholder {
+      text-transform: uppercase;
+      font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+      font-weight: 700;
+      color: #bbb;
+  }
+  
+  section#contact .text-danger {
+      color: #e74c3c;
+  }
+  
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  .dropdown .dropbtn {
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+  
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    background-color:#10847e;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }

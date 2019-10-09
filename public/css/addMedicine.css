@@ -1,9 +1,82 @@
+/* Google Fonts */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+/* sets whole page to Open Sans and sets background color */
 body {
-    background-color: gainsboro;
+  font-family: 'Open Sans', 'sans-serif';
+  background-image: url(http://benague.ca/files/congruent_outline.png);
 }
-tr{
-    text-align: center;
+
+/* login div */
+.login {
+  background-color: #ffffff;
+  width: 420px;
+  /* height: 312px; */
+  margin: 0 auto;
+  padding: 0;
+  border: 2px solid #10847e;
+  border-radius: 5px;
 }
-td, th{
-    padding: 2px;
+
+/* login header */
+h1 {
+  color: #10847e;
+  text-align: center;
+  font-size: 36px;
+  padding-top: 10px;
+}
+
+/* div containing form */
+form {
+  text-align: center;
+}
+
+/* username and password fields */
+input:not([type="button"]) {
+  font-family: 'Open Sans', 'sans-serif';
+  border: 1px solid #acacac;
+  color: #666;
+  opacity: .7;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  width: 250px;
+  transition: all 1.0s;
+  -webkit-transition: all 1.0s;
+  -moz-transition: all 1.0s;
+  font-size: 16px;
+}
+
+input:focus:not([type="button"]) {
+  border: 1px solid #10847e;
+  opacity: 1;
+  width: 320px;
+  outline: none;
+  color: #10847e;
+}
+
+/* submit button */
+input[type="button"] {
+  padding: 15px 25px;
+  font-size: 22px;
+  width: 420px;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+  background-color: #10847e;
+  box-shadow: 0px 5px 0px 0px #10847e;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+}
+
+input[type="button"]:active {
+  transform: translate(0px, 5px);
+  -webkit-transform: translate(0px, 5px);
+  box-shadow: 0px 0px 0px 0px;
+}
+
+input[type="button"]:hover {
+  background-color: #10847e;
 }

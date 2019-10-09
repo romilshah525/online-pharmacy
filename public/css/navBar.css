@@ -1,0 +1,24 @@
+.navbar {
+    background-color: #10847e;
+    color: #fff;
+  }
+  
+  .navbar-brand {
+    /* height: 170px; */
+    padding-left: 4rem;
+    clear: both;
+    color: #fff;
+  }
+  
+  #navbarSupportedContent {
+    margin-top: 120px;
+  }
+  
+  .navbar li {
+    padding-right: 40px;
+    padding-left: 30px;
+    color: #fff;
+  }
+  .form-control {
+    float: right;
+  }

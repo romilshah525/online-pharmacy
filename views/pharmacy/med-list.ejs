@@ -1,54 +1,54 @@
 <%- include('../includes/header.ejs') %>
         <title>ABC Pharmacy</title>
+        <link rel="stylesheet" type="text/css" href="css/listOfMedicines.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
         <%- include("../includes/navBar.ejs") %>
-        <main>
-            <h1>List Of Available Medicines</h1>
-            <% if (length > 0) { %>
-                <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Expiry Date</th>
-                    </tr>
-                    <% for (let medicine of medicines) { %>
-                    <tr>
-                        <td><%= medicine.name %></td>
-                        <td><%= medicine.price %></td>
-                        <td><%= medicine.expDate.getDate() +"/" + (medicine.expDate.getMonth()+1) + "/" +medicine.expDate.getFullYear() %></td>
-                        <td>
-                            <button id="delete"><a href="/add-to-cart/<%= medicine.id %>">Add To Cart (New)</a></button>
-                        </td>
-                        <% if (isAdmin) { %>
-                            <td>
-                                <button><a href="/admin/medicine/<%= medicine.id %>?edit=true">Edit Medicine</a></button>
-                            </td>
-                            <td>
-                                <button><a href="/admin/delete-medicine/<%= medicine.id %>">Delete Medicine</a></button>
-                            </td>
+            <main>
+                    <% if (length > 0) { %>
+                            <% for (let medicine of medicines) { %>
+                            <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= medicine.name %></h5>
+                                        <p class="company">By GLAXOSMITHKLINE PHARMA</p>
+                                        <p class="number">10 capsules in a strip</p>
+                                        <p class="number">₹<%= medicine.price %></p>
+                                        <p class="estimated"><button type="button" class="btn btn-primary btn-md" id="button1">ADD TO CART</button></p>
+                                        <% if (isAdmin) { %>
+                                                <button type="button" class="btn btn-primary btn-md" id="button2"><a href="/admin/medicine/<%= medicine.id %>?edit=true" style="text-decoration:none; color:white;">Edit Medicine</a></button>
+                                                <button type="button" class="btn btn-primary btn-md" id="button3"><a href="/admin/delete-medicine/<%= medicine.id %>"style="text-decoration:none; color:white;">Delete Medicine</a></button>
+                                            </td>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            <% } %>
+                            <input type="hidden" name="" id="medId" value="">
+                        <div class="div1">
+                                <p> Please add medicine to proceed</p>
+                                <button type="button" class="btn btn-primary btn-md" id="button">VIEW CART</button>
+                            </div>
+                            <div>
+                                <img src="image1.PNG" alt="how to" style="clear:right; margin-left: 30px;">
+                            </div> 
+                    <div>
+                        <% if(currPageNo == 1) { %>
+                            <% if (prevPageNo !== currPageNo && currPageNo!== nextPageNo ) { %><a href="?page=<%=currPageNo%>"><%=currPageNo%></a><% } %>
+                            <% if (hasNextPage) { %><a href="?page=<%=nextPageNo%>"><%=nextPageNo%></a><% } %>
+                            <% if (hasNextNextPage) { %><a href="?page=<%=nextNextPageNo%>"><%=nextNextPageNo%></a><% } %>
+                        <% } else if( currPageNo == lastPageNo) { %>
+                            <% if (hasPrevPrevPage) { %><a href="?page=<%=prevPrevPageNo%>"><%=prevPrevPageNo%></a><% } %>
+                            <% if (hasPrevPage) { %><a href="?page=<%=prevPageNo%>"><%=prevPageNo%></a><% } %>
+                            <% if (prevPageNo !== currPageNo && currPageNo!== nextPageNo ) { %><a href="?page=<%=currPageNo%>"><%=currPageNo%></a><% } %>
+                        <% } else { %>
+                            <% if (hasPrevPage) { %><a href="?page=<%=prevPageNo%>"><%=prevPageNo%></a><% } %>
+                            <% if (prevPageNo !== currPageNo && currPageNo!== nextPageNo ) { %><a href="?page=<%=currPageNo%>"><%=currPageNo%></a><% } %>
+                            <% if (hasNextPage) { %><a href="?page=<%=nextPageNo%>"><%=nextPageNo%></a><% } %>
                         <% } %>
-                    </tr>
-                    <% } %>
-                    <input type="hidden" name="" id="medId" value="">
-                </table>
-                <div>
-                    <% if(currPageNo == 1) { %>
-                        <% if (prevPageNo !== currPageNo && currPageNo!== nextPageNo ) { %><a href="?page=<%=currPageNo%>"><%=currPageNo%></a><% } %>
-                        <% if (hasNextPage) { %><a href="?page=<%=nextPageNo%>"><%=nextPageNo%></a><% } %>
-                        <% if (hasNextNextPage) { %><a href="?page=<%=nextNextPageNo%>"><%=nextNextPageNo%></a><% } %>
-                    <% } else if( currPageNo == lastPageNo) { %>
-                        <% if (hasPrevPrevPage) { %><a href="?page=<%=prevPrevPageNo%>"><%=prevPrevPageNo%></a><% } %>
-                        <% if (hasPrevPage) { %><a href="?page=<%=prevPageNo%>"><%=prevPageNo%></a><% } %>
-                        <% if (prevPageNo !== currPageNo && currPageNo!== nextPageNo ) { %><a href="?page=<%=currPageNo%>"><%=currPageNo%></a><% } %>
+                    </div>
                     <% } else { %>
-                        <% if (hasPrevPage) { %><a href="?page=<%=prevPageNo%>"><%=prevPageNo%></a><% } %>
-                        <% if (prevPageNo !== currPageNo && currPageNo!== nextPageNo ) { %><a href="?page=<%=currPageNo%>"><%=currPageNo%></a><% } %>
-                        <% if (hasNextPage) { %><a href="?page=<%=nextPageNo%>"><%=nextPageNo%></a><% } %>
+                        <h3>No Medicines Available!</h3>
                     <% } %>
-                </div>
-            <% } else { %>
-                <h3>No Medicines Available!</h3>
-            <% } %>
-        </main>
+                </main>
+        </frameset>
     <%- include("../includes/footer.ejs") %>

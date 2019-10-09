@@ -1,23 +1,25 @@
-<header>
-    <nav>
-        <ul>
-            <li><a href="/" >Home</a></li>
-            <% console.log(`LoggedIn:${isAuthenticated}`);%>
-            <% console.log(`Admin:${isAdmin}`);%>
-            <li><a href="/medicine-list" >Medicine List</a></li>
+<link rel="stylesheet" href="css/navBar.css">
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div>
+        <h4 class="navbar-brand">MEDLIFE STORE</h4><input class="form-control" type="search" placeholder="Search" aria-label="Search"/>
+    </div>
+    <div class="navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="/" >Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/medicine-list" >Medicine List</a></li>
             <% if(!isAuthenticated) { %>
-                <li><a href="/signup" >Sign Up</a></li>
-                <li><a href="/login" >Log In</a></li>
+                <li class="nav-item"><a class="nav-link" href="/signup" >Sign Up</a></li>
+                <li class="nav-item"><a class="nav-link" href="/login" >Log In</a></li>
             <% } else if(isAuthenticated && isAdmin) { %>
-                <li><a href="/admin/add-medicine" >Add Medicine</a></li>
-                <li><a href="/cart">My Cart</a></li>
-                <li><a href="/orders" >Orders</a></li>
-                <li><a href="/logout" >Log Out</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin/add-medicine" >Add Medicine</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="/cart">My Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="/orders" >Orders</a></li> -->
+                <li class="nav-item"><a class="nav-link" href="/logout" >Log Out</a></li>
             <% } else { %>
-                <li><a href="/cart">My Cart</a></li>
-                <li><a href="/orders" >Orders</a></li>
-                <li><a href="/logout" >Log Out</a></li>
+                <li class="nav-item"><a class="nav-link" href="/cart">My Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="/orders" >Orders</a></li>
+                <li class="nav-item"><a class="nav-link" href="/logout" >Log Out</a></li>
             <% } %>
         </ul>
-    </nav>
-</header>
+    </div>
+</nav>

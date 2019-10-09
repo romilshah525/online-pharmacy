@@ -80,7 +80,6 @@ exports.postLogin = (req, res) => {
         successRedirect: '/',
         failureRedirect: '/login',
         failureFlash: 'Invalid Username or Password!',
-        req.flash('error','Enter valid credentials!')
     }), function(req, res) {
         res.redirect('/medicine-list');
     }
