@@ -77,7 +77,7 @@ exports.getLogin = (req, res) => {
 
 exports.postLogin = (req, res) => {
     passport.authenticate('local', {
-        successRedirect: '/',
+        successRedirect: '/medicine-list',
         failureRedirect: '/login',
         failureFlash: 'Invalid Username or Password!',
     }), function(req, res) {

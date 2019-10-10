@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="css/navBar.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/navBar.css">
 <nav class="navbar navbar-expand-lg navbar-light">
     <div>
         <h4 class="navbar-brand">MEDLIFE STORE</h4><input class="form-control" type="search" placeholder="Search" aria-label="Search"/>
@@ -12,8 +13,8 @@
                 <li class="nav-item"><a class="nav-link" href="/login" >Log In</a></li>
             <% } else if(isAuthenticated && isAdmin) { %>
                 <li class="nav-item"><a class="nav-link" href="/admin/add-medicine" >Add Medicine</a></li>
-                <!-- <li class="nav-item"><a class="nav-link" href="/cart">My Cart</a></li>
-                <li class="nav-item"><a class="nav-link" href="/orders" >Orders</a></li> -->
+                <li class="nav-item"><a class="nav-link" href="/cart">My Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="/orders" >Orders</a></li>
                 <li class="nav-item"><a class="nav-link" href="/logout" >Log Out</a></li>
             <% } else { %>
                 <li class="nav-item"><a class="nav-link" href="/cart">My Cart</a></li>

@@ -76,15 +76,15 @@
         <div class="subMenu" >
             <div class="inner">
                                 <a href="/" id="sTop" class="subNavBtn">Home</a>
-                                <a href="/medicine-list" class="subNavBtn">Medicine List</a>
-                                <a href="#" id="s1" class="subNavBtn"> Steps To Order</a>
-                                <a href="#" id="s2" class="subNavBtn"> Health Articles</a>
-                                <a href="#" id="s3" class="subNavBtn">Contact Us</a>
+                                <a href="/medicine-list" id="s4" class="subNavBtn">Medicine List</a>
                                 <% if(!isAuthenticated) { %>
                                     <!-- <a href="/signup" class="subNavBtn">Sign Up</a>
-                                    <a href="/login" class="subNavBtn">Log In</a> -->
+                                        <a href="/login" class="subNavBtn">Log In</a> -->
+                                    <a href="#" id="s1" class="subNavBtn"> Steps To Order</a>
+                                    <a href="#" id="s2" class="subNavBtn"> Health Articles</a>
+                                    <a href="#" id="s3" class="subNavBtn">Contact Us</a>
                                     <div class="dropdown">
-                                            <button class="dropbtn">Dropdown 
+                                            <button class="dropbtn">User 
                                               <i class="fa fa-caret-down"></i>
                                             </button>
                                             <div class="dropdown-content">
@@ -93,13 +93,13 @@
                                              </div>
                                           </div> 
                                 <% } else if(isAuthenticated && isAdmin) { %>
-                                    <a href="/admin/add-medicine" class="subNavBtn">Add Medicine</a>
-                                    <a href="/cart" class="subNavBtn">My Cart</a>
-                                    <a href="/orders" class="subNavBtn">Orders</a>
-                                    <a href="/logout" class="subNavBtn">Log Out</a>
+                                    <a href="/admin/add-medicine" id="s4" class="subNavBtn">Add Medicine</a>
+                                    <a href="/cart" id="s4" class="subNavBtn">My Cart</a>
+                                    <a href="/orders" id="s4" class="subNavBtn">Orders</a>
+                                    <a href="/logout" id="s4" class="subNavBtn">Log Out</a>
                                 <% } else { %>
-                                    <a href="/cart" class="subNavBtn">My Cart</a>
-                                    <a href="/orders" class="subNavBtn">Orders</a>
+                                    <a href="/cart" id="s4" class="subNavBtn">My Cart</a>
+                                    <a href="/orders" id="s4" class="subNavBtn">Orders</a>
                                     <a href="/logout" >Log Out</a>
                                 <% } %>
                 <!-- <a href="#" id="sTop" class="subNavBtn"> Home</a> 
