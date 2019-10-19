@@ -4,9 +4,16 @@
     <body>
         <%- include("includes/navBar.ejs") %>
         <h1>Page Not Found!</h1>
+        <h4>Blah Blah</h4>
         <main>
             <h1>
                 <%= mainContent %>
             </h1>
+            <h3>
+                <% if(errorMessage) { %>
+                    <%= errorMessage %>
+                    <% console.log(errorMessage) %>
+                <% } %>
+            </h3>
         </main>
     <%- include("includes/footer.ejs") %>
