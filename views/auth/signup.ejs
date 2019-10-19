@@ -1,119 +1,66 @@
-<!-- <%- include('../includes/header.ejs') %>
-        <title>ABC Pharmacy</title>
-    </head>
-    <body>
-        <%- include("../includes/navBar.ejs") %>
-        <main>
-            <form action="/signup" method="post">
-                <label for="">Name</label>
-                <input type="text" name="name" >
-                <label for="">Gender</label>
-                <input type="text" name="gender" >
-                <label for="">Age</label>
-                <input type="number" name="age" >
-                <label for="">Address</label>
-                <input type="text" name="address" >
-                <label for="">Contact Details</label>
-                <input type="number" name="contact" >
-                <label for="">Email</label>
-                <input type="text" name="username" >
-                <label for="">Password</label>
-                <input type="password" name="password" >
-                <label for="">Confirm Password</label>
-                <input type="password" name="confirm-password" >
-                <button type="submit" >Sign Up</button>
-            </form>
-        </main>
-    <%- include("../includes/footer.ejs") %> -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Register
+		</title>
+		<link rel="stylesheet" type="text/css" href="css/register.css" />
+	</head>
+	<body>
+			<%- include("../includes/navBar.ejs") %>
+		<div class="register-photo">
+			<div class="form-container">
+				<div class="image-holder"></div>
+		
+				<form method="post">
+					<h2 class="text-center"><strong>Create</strong> an account.</h2>
+		
+					<div class="form-group">
+						<input class="form-control" type="text" name="name" placeholder="Username">
+					</div>
 
+					<div class="form-group">
+						<input class="form-control" type="number" name="age" placeholder="Age">
+					</div>
+					<h4 style="margin: 10px 0px;">Gender</h4>
+					<div class="form-group">
+						<input type="radio" name="gender" value="male" checked> Male
+						<input type="radio" name="gender" value="female"> Female
+						<input type="radio" name="gender" value="other"> Other
+					</div>
+						
 
+					<div class="form-group">
+						<input class="form-control" type="number" name="contact" placeholder="Contact">
+					</div>
 
+					<div class="form-group">
+						<textarea class="form-control" name="address"  rows="30" cols="22" style="height: 70px; width: 200px;" placeholder="Address"></textarea>
+					</div>
 
+					<div class="form-group">
+						<input class="form-control" type="email" name="email" placeholder="Email">
+					</div>
+					
+					<div class="form-group">
+						<input class="form-control" type="password" name="password" placeholder="Password">
+					</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<%- include('../includes/header.ejs') %>
-        <title>
-            Register
-        </title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="css/register.css" />
-    </head>
-    <body>
-            <%- include("../includes/navBar.ejs") %>
-            <div class="register-photo">
-                <div class="form-container">
-                    <div class="image-holder"></div>
-            
-                    <form method="post">
-                        <h2 class="text-center"><strong>Create</strong> an account.</h2>
-            
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="name" placeholder="Username">
-                        </div>
-    
-                        <div class="form-group">
-                            <input class="form-control" type="number" name="age" placeholder="Age">
-                        </div>
-                        <h4 style="margin: 10px 0px;">Gender</h4>
-                        <div class="form-group">
-                            <input type="radio" name="gender" value="male" checked> Male
-                            <input type="radio" name="gender" value="female"> Female
-                            <input type="radio" name="gender" value="other"> Other
-                        </div>
-                            
-    
-                        <div class="form-group">
-                            <input class="form-control" type="number" name="contact" placeholder="Contact">
-                        </div>
-    
-                        <div class="form-group">
-                            <textarea class="form-control" name="address"  rows="30" cols="22" style="height: 70px; width: 200px;" placeholder="Address"></textarea>
-                        </div>
-    
-                        <div class="form-group">
-                            <input class="form-control" type="email" name="email" placeholder="Email">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input class="form-control" type="password" name="password" placeholder="Password">
-                        </div>
-    
-                        
-    
-                        
-                        <div class="form-group">
-                            <input class="form-control" type="password" name="password-repeat" placeholder="Password (repeat)">
-                        </div>
-                        
-                         <div class="form-group">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox">I agree to the license terms.
-                                </label>
-                            </div>
-                        </div> 
-            
-                        <div class="form-group">
-                            <a href="Login_v1/index.html"><button class="btn btn-primary btn-block" type="submit">Sign Up</button></a>
-                        </div>
-            
-                        <a href="Login_v1/index.html" class="already">You already have an account? Login here.</a>
-                    </form>
-                </div>
-            </div>
-    </body>
+					<div class="form-group">
+						<div class="form-check">
+							<label class="form-check-label">
+								<input class="form-check-input" type="checkbox">I agree to the license terms.
+							</label>
+						</div>
+					</div>
+		
+					<div class="form-group">
+						<a ><button class="btn btn-primary btn-block" type="submit"type="submit">Sign Up</button></a>
+					</div>
+		
+					<a href="/login" class="already">You already have an account? Login here.</a>
+				</form>
+			</div>
+		</div>
+	</body>
 </html>
