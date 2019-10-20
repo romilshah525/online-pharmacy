@@ -5,12 +5,22 @@ const router = express.Router();
 const pharmacyController = require('../controllers/pharmacy');
 const isLoggedIn = require('../middlewares/isLoggedIn');
 
+function makeid(length) {
+   var result = '';
+   var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'images');
     },
     filename: (req, file, cb) => {
-        let name = req.user.username+'_';
+        let name = makeid(5) + req.user.username+'_';
         cb(null, name+file.originalname);
     }
 });

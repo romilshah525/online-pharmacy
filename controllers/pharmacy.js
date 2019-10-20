@@ -157,7 +157,7 @@ exports.postOrder = (req, res) => {
                         </style>
                     </head>
                     <p>
-                        Your order has been successfully placed! Below are the order detaisls:
+                        Your order has been successfully placed! Below are the order details!\nYour order id is: ${result._id}
                     </p>
                     <table>
                         <tr>

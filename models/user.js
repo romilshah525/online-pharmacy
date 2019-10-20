@@ -3,16 +3,16 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    name: { type: String },
-    gender: { type: String },
-    age: { type: Number },
-    address: { type: String },
-    contact: { type: Number },
+    // name: { type: String },
+    // gender: { type: String },
+    // age: { type: Number },
+    // address: { type: String },
+    // contact: { type: Number },
     username: { type: String },
-    password: { type: String },
+    // password: { type: String },
     isAdmin: { type: Boolean, default: false },
-    resetToken: String,
-    resetTokenExpirationDate: Date,
+    // resetToken: String,
+    // resetTokenExpirationDate: Date,
     cart: {
         items: [{
                     medicineId: { type: Schema.Types.ObjectId, ref:'Medicine', required: true },

@@ -1,5 +1,6 @@
 const passportLocalMongoose = require('passport-local-mongoose');
-const localStrategy =  require('passport-local');
+// const localStrategy =  require('passport-local');
+const localStrategy =  require('passport-local').Strategy;
 const session = require('express-session');
 const nodemailer = require('nodemailer');
 const flash = require('connect-flash');
@@ -17,8 +18,8 @@ const transporter = nodemailer.createTransport({
 });
 
 passport.use(new localStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
 exports.getSignUp = (req, res) => {
 	if (req.flash('error').length > 0) {
@@ -34,17 +35,16 @@ exports.postSignUp = (req, res) => {
 	req.body.address
 	req.body.age
 	req.body.contact
-	const email = req.body.email
-	User.register( new User({
+	const email = req.body.email;
+	newUser = new User({
 		username: req.body.username,
 		name: req.body.name,
 		gender: req.body.gender,
 		address: req.body.address,
 		age: req.body.age,
 		contact: req.body.contact,
-		 }),
-		req.body.password,
-		function(err, user) {
+	});
+	User.register( newUser, req.body.password, (err, user) => {
 			if(err) {
 				req.flash('error','Enter valid credentials!');
 				console.log(`Error:${err}`);
@@ -75,41 +75,115 @@ exports.postSignUp = (req, res) => {
 };
 
 exports.getLogin = (req, res) => {
-	console.log(`----->ERROR:${req.flash('error')}`);
-	console.log(`----->failureFlash:${req.flash('failureFlash')}`);
-	console.log(req);
-	
-	res.render("auth/login");
+	console.log(`----->failureFlash:`);
+	console.log(req.flash('message'));
+	console.log(`----->failureFlash:`);
+	console.log(req.flash('failureFlash'));
+	console.log(`----->ERROR:`);
+	console.log(req.flash('error'));
+	res.render("auth/login", {
+		error: req.flash('error')
+	});
 };
 
 exports.postLogin = (req, res) => {
-	console.log(`REQUEST:${req}`);
+	// console.log(`REQUEST:${req}`);
 	passport.authenticate('local', {
 		successRedirect: '/medicine-list',
 		failureRedirect: '/login',
-		failureFlash: 'Invalid Username or Password!'
-		// failureFlash: true
-	}), function(req, res) {
-		res.redirect('/medicine-list');
-	}
+		failureFlash: {type: 'error',message: 'blah'}
+	})
+	// , function(req, res) {
+	// 	res.redirect('/medicine-list');
+	// }
 }
+
+
+
+// exports.postLogin = function(req, res) { 
+//   if(!req.body.username){ 
+//     res.json({success: false, message: "Username was not given"}) 
+//   } else { 
+//     if(!req.body.password){ 
+//       res.json({success: false, message: "Password was not given"}) 
+//     }else{ 
+//       passport.authenticate('local', function (err, user, info) {  
+//          if(err){ 
+//            res.json({success: false, message: err}) 
+//          } else{ 
+//           if (! user) { 
+//             res.json({success: false, message: 'username or password incorrect'}) 
+//           } else{ 
+//             req.login(user, function(err){ 
+//               if(err){ 
+//                 res.json({success: false, message: err}) 
+//               }else{ 
+//                 const token =  jwt.sign({userId : user._id,  
+//                    username:user.username}, secretkey,  
+//                       {expiresIn: '24h'}) 
+//                 res.json({success:true, message:"Authentication successfull", token: token }); 
+//               } 
+//             }) 
+//           } 
+//          } 
+//       })(req, res); 
+//     } 
+//   } 
+// }; 
 
 exports.getLogout = (req, res) => {
 	req.logout();
 	res.redirect('/');
 };
 
-// exports.getResetPassword = (req, res) => {
-//     let error = req.flash('error');
-//     if(error.length > 0) {
-//         error = error[0];
-//     } else {
-//         error = null;
-//     }
-//     res.render('auth/reset-password',{
-//         error:error
-//     });
-// };
+exports.getResetPassword = (req, res) => {
+    let error = req.flash('error');
+    if(error.length > 0) {
+        error = error[0];
+    } else {
+        error = null;
+    }
+    res.render('auth/reset-password',{
+        error:error
+    });
+};
+
+exports.postResetPassword = (req, res) => {
+	User.findOne({email: email})
+        .then( user => {
+            if(!user) {
+                req.flash('error','email doesn\'t exists');
+                return res.redirect('/signup');
+            }
+			user.setPassword(req.body.password,(err, user) => {
+			if(err) {
+				req.flash('error','Enter valid credentials!');
+				console.log(`Error:${err}`);
+				return res.redirect('/signup');
+			}
+			console.log(`User Saved Details:${user}`);
+			passport.authenticate('local')(req, res, function(){
+				console.log(`Sending mail to : ${user.username}...\n`);
+				let mailOptions = {
+					from: 'shahromil525@gmail.com',
+					to: user.username,
+					subject: 'Email Registered on ABC Pharmacy!',
+					text: `Hey there, your account has been created!\n\nYour Username is ${user.username}`
+				};
+				transporter.sendMail(mailOptions, (err, info) => {
+					if (err) {
+						console.log(`Email Not Send!\n`);
+						console.log(err);
+					} else {
+						console.log(`Email sent successfully: ${info.response}`);
+					}
+					res.redirect('/login');
+				});
+					res.redirect('/login');
+			});
+		}
+	);
+})};
 
 // exports.postResetPassword = (req, res) => {
 //     var email = req.body.email;
