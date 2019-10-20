@@ -1,6 +1,5 @@
 const passportLocalMongoose = require('passport-local-mongoose');
-// const localStrategy =  require('passport-local');
-const localStrategy =  require('passport-local').Strategy;
+const localStrategy =  require('passport-local');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const flash = require('connect-flash');
