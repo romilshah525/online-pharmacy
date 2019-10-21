@@ -8,6 +8,11 @@
 	</head>
 	<body>
 			<%- include("../includes/navBar.ejs") %>
+			<h3>
+				<% if (error) { %>
+				<%= error %>
+				<% } %>
+			</h3>
 		<div class="register-photo">
 			<div class="form-container">
 				<div class="image-holder"></div>

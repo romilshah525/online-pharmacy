@@ -12,6 +12,11 @@
     <body>
         <%- include("../includes/navBar.ejs") %>
         <main>
+            <h3>
+                <% if (error) { %>
+                <%= error %>
+                <% } %>
+            </h3>
             <h1>Your Cart</h1>
             <% if (length > 0) { %>
                 <table >
@@ -26,8 +31,8 @@
                             <% i++ %>
                             <td><%= medicine.medicineId.name %></td>
                             <td><%= medicine.medicineId.price %></td>
-                            <form action="/" method="post">
-                            <!-- <form action="/delete-from-cart/<%= medicine.medicineId._id %>" method="post"> -->
+                            <!-- <form action="/" method="post"> -->
+                            <form action="/delete-from-cart/<%= medicine.medicineId._id %>" method="post">
                                 <td><label id="<%=i%>" name="medQty"><%= medicine.quantity %></td>
                                 <td><button type="submit">Delete From Cart</button></td>
                                 <!-- <td><button onclick="update(event, this.id)"><b>+</b></button></td>
@@ -40,7 +45,7 @@
                 <form action="/order" method="post" enctype="multipart/form-data">
                     <label for="image">Image</label>
                     <input type="file" name="image" id="image" >
-                    <button type="submit">Order Now</button>
+                    <button type="submit">Proceed to Billing</button>
                 </form>
             <% } else { %>
                 <h3>No medicines added to the cart.<br />

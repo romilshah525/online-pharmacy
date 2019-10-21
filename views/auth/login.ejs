@@ -21,13 +21,11 @@
 					<img src="images/img-01.png" alt="IMG">
 				</div>
 				<form class="login100-form validate-form" action="/login" method="post">
-					<div class="text">
-						<%if(error.length>0) { %>
-							<h3>Error:<%= error%></h3>
-							<br>
-							<hr>
+					<h3>
+						<% if (error) { %>
+						<%= error %>
 						<% } %>
-					</div>
+					</h3>
 					<span class="login100-form-title">
 						Member Login
 					</span>

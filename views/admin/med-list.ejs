@@ -5,6 +5,11 @@
         <%- include("../includes/navBar.ejs") %>
         <main>
             <h1>List Of Available Medicines</h1>
+            <h3>
+                <% if (error) { %>
+                <%= error %>
+                <% } %>
+            </h3>
             <% if (length > 0) { %>
                 <table>
                     <tr>

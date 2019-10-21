@@ -1,14 +1,19 @@
 <%- include('includes/header.ejs') %>
-        <title><%= pageTitle%></title>
-    </head>
-    <body>
-        <%- include("includes/navBar.ejs") %>
-        <h1>Page Not Found!</h1>
-        <h4>Blah Blah</h4>
-        <main>
-            <h1>
-                <%= mainContent %>
-            </h1>
-            
-        </main>
-    <%- include("includes/footer.ejs") %>
+		<title><%= pageTitle%></title>
+	</head>
+	<body>
+		<%- include("includes/navBar.ejs") %>
+		<h1>Page Not Found!</h1>
+		<h4>Blah Blah</h4>
+		<main>
+			<h3>
+				<% if (error) { %>
+				<%= error %>
+				<% } %>
+			</h3>
+			<h1>
+				<%= mainContent %>
+			</h1>
+			
+		</main>
+	<%- include("includes/footer.ejs") %>

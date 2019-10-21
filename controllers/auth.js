@@ -13,25 +13,24 @@ const transporter = nodemailer.createTransport({
 	auth: {
 		user: 'shahromil525@gmail.com',
 		pass: 'rldegzyqjsqirwpf'
-	}   
+	}
 });
 
 passport.use(new localStrategy(User.authenticate()));
 
 exports.getSignUp = (req, res) => {
-	if (req.flash('error').length > 0) {
-		console.log(req.flash('error'));
+	let error = req.flash('error');
+	if(error.length > 0) {
+		error = error[0];
+	} else {
+		error = null;
 	}
-	res.render('auth/signup');
+	res.render('auth/signup',{
+		error:error
+	});
 };
 
 exports.postSignUp = (req, res) => {
-	req.body.username
-	req.body.name
-	req.body.gender
-	req.body.address
-	req.body.age
-	req.body.contact
 	const email = req.body.email;
 	newUser = new User({
 		username: req.body.username,
@@ -72,8 +71,14 @@ exports.postSignUp = (req, res) => {
 };
 
 exports.getLogin = (req, res) => {
-	res.render("auth/login", {
-		error: req.flash('error')
+	let error = req.flash('error');
+	if(error.length > 0) {
+		error = error[0];
+	} else {
+		error = null;
+	}
+	res.render('auth/login',{
+		error:error
 	});
 };
 
@@ -82,7 +87,8 @@ exports.postLogin = (req, res) => {
 		successRedirect: '/medicine-list',
 		failureRedirect: '/login',
 		failureFlash: {type: 'error',message: 'blah'}
-	}) 
+	});
+}
 
 exports.getLogout = (req, res) => {
 	req.logout();
