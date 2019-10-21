@@ -44,6 +44,9 @@ router.get('/orders', isLoggedIn, pharmacyController.getOrders);
 router.get('/clear-cart', isLoggedIn, pharmacyController.clearCart);
 router.post('/order', isLoggedIn, upload.single('image'), pharmacyController.postOrder);
 router.get('/upload-prescription', isLoggedIn, pharmacyController.getPrescriptions);
+// router.get('/billing', isLoggedIn, pharmacyController.getBilling);
+router.post('/billing', isLoggedIn, upload.single('image'), pharmacyController.postBilling);
+
 // router.post('/upload-prescription', isLoggedIn, upload.single('image'), pharmacyController.postPrescriptions);
 
 module.exports = router;
