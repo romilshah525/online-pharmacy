@@ -260,3 +260,17 @@ exports.clearCart = (req, res) => {
 		res.redirect('/cart');
 	});
 }
+
+exports.getPrescriptions = (req, res) => {
+	let error = req.flash('error');
+	if(error.length > 0) {
+		error = error[0];
+	} else {
+		error = null;
+	}
+	const prescriptionList = req.user.prescription;
+	res.render('pharmacy/prescriptions', {
+		prescriptionList: prescriptionList,
+		error: error
+	});
+};

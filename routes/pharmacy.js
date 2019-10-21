@@ -17,11 +17,13 @@ function makeid(length) {
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'images');
+        cb(null, 'public/images');
     },
     filename: (req, file, cb) => {
-        let name = makeid(5) + req.user.username+'_';
-        cb(null, name+file.originalname);
+        req.user.orderCount += 1;
+        let name = req.user.username+'.'+req.user.orderCount+'.'+file.mimetype.split('/')[1];
+        req.user.prescription.push(name);
+        cb(null, name);
     }
 });
 const fileFilter = (req, file, cb) => {
@@ -41,5 +43,7 @@ router.post('/delete-from-cart/:medicineId', isLoggedIn, pharmacyController.post
 router.get('/orders', isLoggedIn, pharmacyController.getOrders);
 router.get('/clear-cart', isLoggedIn, pharmacyController.clearCart);
 router.post('/order', isLoggedIn, upload.single('image'), pharmacyController.postOrder);
+router.get('/upload-prescription', isLoggedIn, pharmacyController.getPrescriptions);
+// router.post('/upload-prescription', isLoggedIn, upload.single('image'), pharmacyController.postPrescriptions);
 
 module.exports = router;

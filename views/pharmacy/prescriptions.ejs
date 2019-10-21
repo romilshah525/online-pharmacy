@@ -1,0 +1,21 @@
+<%- include('../includes/header.ejs') %>
+        <title>ABC Pharmacy</title>
+    </head>
+    <body>
+        <%- include("../includes/navBar.ejs") %>
+        <main>
+            <h3>
+                <% if (error) { %>
+                <%= error %>
+                <% } %>
+            </h3>
+            <h1>Your Prescriptions</h1>
+            <% if(prescriptionList.length > 0) { %>
+                <% prescriptionList.forEach( prescription => { %>
+                    <img src="images/<%=prescription%>" alt="Prescription ">
+                <% }) %>
+            <% } else { %>
+                <h3>Youve no previous uploaded prescriptions!</h3>
+            <% } %>
+            </main>
+    <%- include("../includes/footer.ejs") %>
