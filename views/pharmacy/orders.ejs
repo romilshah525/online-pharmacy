@@ -5,11 +5,7 @@
 		<%- include("../includes/navBar.ejs") %>
 		<main>
 			<h1>Your Orders</h1>
-			<h3>
-				<% if (error) { %>
-				<%= error %>
-				<% } %>
-			</h3>
+
 			<% if (orders.length <= 0) { %>
 				<h1>Nothing there!</h1>
 				<h3>No orders.
@@ -20,7 +16,7 @@
 				<ul>
 					<% orders.forEach(order => { %>
 						<li>
-							<h4>Order - # <%= order._id %></h4>
+							<!-- <h4>Order - # <%= order._id %></h4> -->
 							Order Price - <%= order.amount %>
 							<ul>
 								<% order.medicines.forEach( m => { %>

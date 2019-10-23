@@ -1,5 +1,10 @@
 <%- include('../includes/header.ejs') %>
         <title>ABC Pharmacy</title>
+        <link rel="stylesheet" type="text/css" href="css/listOfMedicines.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/upload.css" />
         <script>
             // function validate(e) {
             //     if(document.getElementById('image').value) {
@@ -7,60 +12,97 @@
             //         console.log("Insert File!");
             //     }
             // }
+            var current_fs, next_fs, previous_fs; 
+      $(".next").click(function() {
+        current_fs = $(this).parent();
+        next_fs = $(this)
+          .parent()
+          .next();
+        $("#progressbar li")
+          .eq($("fieldset").index(next_fs))
+          .addClass("active");
+        next_fs.show();
+        current_fs.hide();
+      });
+
+      $(".previous").click(function() {
+        current_fs = $(this).parent();
+        previous_fs = $(this)
+          .parent()
+          .prev();
+        $("#progressbar li")
+          .eq($("fieldset").index(current_fs))
+          .removeClass("active");
+        previous_fs.show();
+        current_fs.hide();
+      });
+
+      $(".submit").click(function() {
+        return false;
+      });
         </script>
     </head>
     <body>
         <%- include("../includes/navBar.ejs") %>
         <main>
-            <h3>
-                <% if (error) { %>
-                <%= error %>
-                <% } %>
-            </h3>
-            <h1>Your Cart</h1>
+
+            <h1 class="text-center">Your Cart</h1>
+            <div>
             <% if (length > 0) { %>
-                <table >
-                    <tr>
-                        <th>Name</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                    </tr>
                     <% let i = 0 %>
                     <% for (let medicine of medicines) { %>
-                        <tr>
-                            <% i++ %>
-                            <td><%= medicine.medicineId.name %></td>
-                            <td><%= medicine.medicineId.price %></td>
-                            <!-- <form action="/" method="post"> -->
-                            <form action="/delete-from-cart/<%= medicine.medicineId._id %>" method="post">
-                                <td><label id="<%=i%>" name="medQty"><%= medicine.quantity %></td>
-                                <td><button type="submit">Delete From Cart</button></td>
-                                <!-- <td><button onclick="update(event, this.id)"><b>+</b></button></td>
-                                <td><button onclick="update(event, this.id)"><b>-</b></button></td> -->
-                            </form>
-                        </tr>
+                        <div class="card">
+								<div class="card-body">
+									<h5 class="card-title"><%= medicine.medicineId.name %></h5>
+									<p class="number"><%= medicine.medicineId.capacity %> capsules in a strip</p>
+                                    <p class="number">₹<%= medicine.medicineId.price %>*</p>
+                                    <p class="number" name="medQty"><%= medicine.quantity %></p>
+                                    <form action="/delete-from-cart/<%= medicine.medicineId._id %>" method="post">
+                                        <p class="estimated"><button type="submit" class="btn btn-primary btn-md" id="button1" >Delete From Cart</button></p>
+                                    </form>
+								</div>
+							</div>
+                      
                     <% } %>
-                </table>
-                <button><a href="/clear-cart">Clear Cart</a></button>
-                <form action="/billing" method="post" enctype="multipart/form-data">
+                    <form id="msform" action="/billing" method="post" enctype="multipart/form-data">
+                        <fieldset>
+                          <h2 class="fs-title">Upload Prescription</h2>
+                          <h3 class="fs-subtitle">Please upload the prescription</h3>
+                          <input
+                            id="image"
+                            name="image"
+                            type="file"
+                            style="justify-content: center; width:90%;"
+                          /><br />
+                  
+                          <a href="#"
+                            ><input
+                              type="submit"
+                              name="next"
+                              class="next action-button"
+                              value=" PROCEED"
+                            />
+                          </a>
+                        </fieldset>
+                       
+                      </form>
+                    </div>
+                <button type="submit" class="btn btn-md" id="button4 " style="background-color:#10847e;  margin-top: 310px; margin-left:220px" ><a href="/clear-cart" style="text-decoration: none;color:#ffffff;">Clear Cart</a></button>
+
+                <!-- <form action="/billing" method="post" enctype="multipart/form-data">
                     <label for="image">Image</label>
                     <input type="file" name="image" id="image" >
                     <button type="submit">Upload Prescription</button>
-                </form>
-                <!-- <form action="/order" method="post" enctype="multipart/form-data">
-                    <label for="image">Image</label>
-                    <input type="file" name="image" id="image" >
-                    <button type="submit">Proceed to Billing</button>
                 </form> -->
-                <!-- <button><a href="/billing">Proceed to Billing</a></button> -->
-                <h1>Your Previous Prescriptions</h1>
+               
+                <!-- <h1>Your Previous Prescriptions</h1>
                 <% if(prescriptionList.length > 0) { %>
                     <% prescriptionList.forEach( prescription => { %>
                         <img src="images/<%=prescription%>" alt="Prescription ">
                     <% }) %>
                 <% } else { %>
-                    <h3>Youve no previous uploaded prescriptions!</h3>
-                <% } %>
+                    <h3>You've no previous uploaded prescriptions!</h3>
+                <% } %> -->
             <% } else { %>
                 <h3>No medicines added to the cart.<br />
                     <a href="/medicine-list">Click here</a>to add medicines to cart.

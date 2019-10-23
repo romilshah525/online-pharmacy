@@ -1,23 +1,23 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/navBar.css">
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg ">
     <div>
         <h4 class="navbar-brand">MEDLIFE STORE</h4><input class="form-control-nav form-control" type="search" placeholder="Search" aria-label="Search"/>
     </div>
     <div class="navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="/" >Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="/medicine-list" >Medicine List</a></li>
+            <li class="nav-item"><a class="nav-link"  style=" color: #ffffff;padding-left:80px;" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link"  style=" color: #ffffff;padding-left:80px;" href="/medicine-list" >Medicine List</a></li>
             <% if(!isAuthenticated) { %>
-                <li class="nav-item"><a class="nav-link" href="/signup" >Sign Up</a></li>
-                <li class="nav-item"><a class="nav-link" href="/login" >Log In</a></li>
+                <li class="nav-item"><a class="nav-link"  style=" color: #ffffff;padding-left:80px;" href="/signup" >Sign Up</a></li>
+                <li class="nav-item"><a class="nav-link"  style=" color: #ffffff;padding-left:80px;" href="/login" >Log In</a></li>
             <% } else if(isAuthenticated && isAdmin) { %>
-                <li class="nav-item"><a class="nav-link" href="/admin/add-medicine" >Add Medicine</a></li>
-                <li class="nav-item"><a class="nav-link" href="/logout" >Log Out</a></li>
+                <li class="nav-item"><a class="nav-link"  style=" color: #ffffff;padding-left:80px;" href="/admin/add-medicine" >Add Medicine</a></li>
+                <li class="nav-item"><a class="nav-link"  style=" color: #ffffff;padding-left:80px;" href="/logout" >Log Out</a></li>
             <% } else { %>
-                <li class="nav-item"><a class="nav-link" href="/cart">My Cart</a></li>
-                <li class="nav-item"><a class="nav-link" href="/orders" >Orders</a></li>
-                <li class="nav-item"><a class="nav-link" href="/logout" >Log Out</a></li>
+                <li class="nav-item"><a class="nav-link"  style=" color: #ffffff;padding-left:80px;" href="/cart">My Cart</a></li>
+                <li class="nav-item"><a class="nav-link"  style=" color: #ffffff;padding-left:80px;" href="/orders" >Orders</a></li>
+                <li class="nav-item"><a class="nav-link"  style=" color: #ffffff;padding-left:80px;" href="/logout" >Log Out</a></li>
             <% } %>
         </ul>
     </div>

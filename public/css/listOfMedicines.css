@@ -17,7 +17,7 @@
   font-size: 12px;
   margin: 5px;
 }
-#button {
+#button,#button1,#button2 {
   background-color: #10847e;
   font-weight: bold;
   float: right;

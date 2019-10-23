@@ -13,12 +13,8 @@
     <body>
         <%- include("../includes/navBar.ejs") %>
         <main>
-            <h3>
-                <% if (error) { %>
-                <%= error %>
-                <% } %>
-            </h3>
-            <h1>Your Bill Details:</h1>
+
+            <h1 class="text-center">Bill Details</h1>
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
@@ -40,7 +36,7 @@
                                         <div class="row pb-5 p-5">
                                             <div class="col-md-6">
                                                 <p class="font-weight-bold mb-4">Client Information</p>
-                                                <p class="mb-1"><%=user.name%>></p>
+                                                <p class="mb-1"><%=user.name%></p>
                                                 <!-- <p>Acme Inc</p> -->
                                                 <p class="mb-1"><%=user.address%></p>
                                                 <!-- <p class="mb-1">6781 45P</p> -->
@@ -69,18 +65,18 @@
                                                             <th class="border-0 text-uppercase small font-weight-bold">Total</th>
                                                         </tr>
                                                     </thead>
-                                                    <% %>
-                                                    <tbody>
-                                                        <% user.cart.items.forEach( p => { %>
-                                                            	<tr>
-                                                                    <% i++; %>
-                                                                    <td><%= i %></td>   
-                                                                    <td><%= p.medicineId.name %></td>
-                                                                    <td><%= p.quantity %></td>
-                                                                    <td><%= p.medicineId.price %></td>
-                                                                    <td><%= p.medicineId.price*p.quantity %></td>
-                                                                </tr>
-                                                             <% } %>
+                                                    
+                                                    <% medicines.forEach( medicine => { %>
+                                                        <tr>
+                                                                <th class="border-0 text-uppercase small font-weight-bold"><%=i+=1;%></th>
+                                                                <th class="border-0 text-uppercase small font-weight-bold"><%=medicine.medicine.name%></th>
+                                                                <!-- <th class="border-0 text-uppercase small font-weight-bold">Description</th> -->
+                                                                <th class="border-0 text-uppercase small font-weight-bold"><%=medicine.quantity%></th>
+                                                                <th class="border-0 text-uppercase small font-weight-bold"><%=medicine.medicine.price%></th>
+                                                                <th class="border-0 text-uppercase small font-weight-bold"><%=medicine.medicine.price * medicine.quantity%></th>
+                                                            </tr>
+                                                    <% })%>
+                                                    
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -111,8 +107,9 @@
                     
                     </div>
                     
-                    <form action="/place-order" method="post"></form>
-                    
+                    <form action="/order" method="post">
+                        <button type="submit">PLace Order</button>
+                </form>
                 </body>
             </html>
             </main>

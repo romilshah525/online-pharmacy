@@ -62,7 +62,7 @@ exports.postSignUp = (req, res) => {
 					} else {
 						console.log(`Email sent successfully: ${info.response}`);
 					}
-					res.redirect('/login');
+					return res.redirect('/login');
 				});
 					res.redirect('/login');
 			});

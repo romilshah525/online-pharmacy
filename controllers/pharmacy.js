@@ -150,7 +150,7 @@ exports.postOrder = (req, res) => {
 	const image = req.file;
 	if(!image) {
 		req.flash('error','Attach an image');
-		return res.render('/cart');
+		return res.render('pharmacy/index');
 	}
 	const imageUrl = image.path;
 	req.user
@@ -295,14 +295,15 @@ exports.postBilling = (req, res) => {
 	const image = req.file;
 	if(!image) {
 		req.flash('error','Attach an image');
-		return res.render('/cart');
+		return res.redirect('/cart');
 	}
 	const imageUrl = image.path;
+	var medicines;
 	req.user
 	.populate('cart.items.medicineId')
 	.execPopulate()
 	.then( user => {
-		const medicines = user.cart.items.map(i => {
+		medicines = user.cart.items.map(i => {
 			return { quantity: i.quantity, medicine: { ...i.medicineId._doc } };
 		});
 		medicines.forEach( m => {
@@ -310,6 +311,12 @@ exports.postBilling = (req, res) => {
 			let q = m.quantity;
 			amt = amt + (p*q);
 		});
+		res.render('pharmacy/bill',{
+		error: error,
+		amt: amt,
+		user: req.user,
+		medicines
+	});
 		// const order = new Order({
 		// 	userId: req.user,
 		// 	medicines,
@@ -393,9 +400,9 @@ exports.postBilling = (req, res) => {
 	// 	req.flash('error','Could not load the page');
 	// 	res.redirect('/cart');
 	// });
-	res.render('pharmacy/bill',{
-		error: error,
-		amt: amt,
-		user: req.user
-	});
+	console.log(
+		req.user.cart.items
+	);
+	
+
 };

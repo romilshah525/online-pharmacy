@@ -11,6 +11,14 @@
 					<%= error %>
 					<% } %>
 				</h3>
+				<% if (!isAdmin) {%>
+					<!-- <img src="images/image1.PNG" alt="how to" style="clear:right;"> -->
+					<div class="div1">
+						<p> Please add medicine to proceed</p>
+						<button type="button" class="btn btn-primary btn-md" id="button" ><a href='/cart' style="text-decoration:none; color:white;">View Cart</a></button>
+						<img src="images/image1.png" style="height:450px;width:400px;top:100px;margin-top: 60px;margin-right: -300px;"/>
+					</div>
+				<% } %>
 				<% if (length > 0) { %>
 					<div>
 						<% for (let medicine of medicines) { %>
@@ -18,13 +26,14 @@
 								<div class="card-body">
 									<h5 class="card-title"><%= medicine.name %></h5>
 									<p class="number"><%= medicine.capacity %> capsules in a strip</p>
-									<p class="number">₹<%= medicine.price %></p>
+									<p class="number">₹<%= medicine.price %>*</p>
+									<p class="estimated">* Estimated price</p>
 									<% if (isAdmin) { %>
 										<button type="button" class="btn btn-primary btn-md" id="button2"><a href="/admin/medicine/<%= medicine.id %>?edit=true" style="text-decoration:none; color:white;">Edit Medicine</a></button>
 										<button type="button" class="btn btn-primary btn-md" id="button3"><a href="/admin/delete-medicine/<%= medicine.id %>"style="text-decoration:none; color:white;">Delete Medicine</a></button>
 									<% } else { %>
 										<% if(medicine.userId && isAuthenticated == medicine.userId.username) {%>
-											<p class="estimated"><button type="button" class="btn btn-primary btn-md" id="button1" ><a href="/delete-from-cart/<%= medicine.id %>" style="text-decoration:none; color:white;">Remove From Cart</a></button></p>
+											<p class="estimated"><button type="button" class="btn btn-primary btn-md" id="button2" ><a href="/delete-from-cart/<%= medicine.id %>" style="text-decoration:none; color:white;">Remove From Cart</a></button></p>
 										<% } else { %>
 											<p class="estimated"><button type="button" class="btn btn-primary btn-md" id="button1" ><a href="/add-to-cart/<%= medicine.id %>" style="text-decoration:none; color:white;">Add To Cart</a></button></p>
 										<% } %>
@@ -33,15 +42,9 @@
 							</div>
 						<% } %>
 						<input type="hidden" name="" id="medId" value="">
-						<% if (!isAdmin) {%>
-							<div class="div1">
-								<p> Please add medicine to proceed</p>
-								<button type="button" class="btn btn-primary btn-md" id="button" ><a href='/cart' style="text-decoration:none; color:white;">View Cart</a></button>
-							</div>
-							<img src="images/image1.PNG" alt="how to" style="clear:right;">
-						<% } %>
+					
 						</div>
-					<div>
+					<!-- <div>
 						<% if(currPageNo == 1) { %>
 							<% if (prevPageNo !== currPageNo && currPageNo!== nextPageNo ) { %><a href="?page=<%=currPageNo%>"><%=currPageNo%></a><% } %>
 							<% if (hasNextPage) { %><a href="?page=<%=nextPageNo%>"><%=nextPageNo%></a><% } %>
@@ -55,7 +58,7 @@
 							<% if (prevPageNo !== currPageNo && currPageNo!== nextPageNo ) { %><a href="?page=<%=currPageNo%>"><%=currPageNo%></a><% } %>
 							<% if (hasNextPage) { %><a href="?page=<%=nextPageNo%>"><%=nextPageNo%></a><% } %>
 						<% } %>
-					</div>
+					</div> -->
 				<% } else { %>
 					<h3>No Medicines Available!</h3>
 				<% } %>

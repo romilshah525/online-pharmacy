@@ -58,14 +58,14 @@ exports.postEditMedicine = (req, res) => {
 };
 
 exports.getAddMedicine = (req, res) => {
-    if(error.length > 0) {
-        error = error[0];
-	} else {
-		error = null;
-	}
+    // if(error.length > 0) {
+    //     error = error[0];
+	// } else {
+	// 	error = null;
+	// }
     res.render('admin/add-med',{
         edit: false,
-        error: error
+        // error: error
     });
 };
 

@@ -5,16 +5,15 @@
 	</head>
 	<body>
 		<%- include("../includes/navBar.ejs") %>
-		<div class="login">
-			<h1 id="header">ADMIN ADD MEDICINE</h1>
-            <h3>
-				<% if (error) { %>
-				<%= error %>
-				<% } %>
-			</h3>
+		<div class="login" style="margin-top: 50px;margin-bottom: 50px;">
+			<% if (edit) { %>
+				<h1 id="header" >ADMIN EDIT MEDICINE</h1>
+			<% } else { %>
+				<h1 id="header" >ADMIN ADD MEDICINE</h1>
+			<% } %>
 			<main>
 					<% if (edit) { %>
-						<form action="/admin/medicine/<%= medicine.id %>" method="POST" id="form">
+						<form action="/admin/medicine/<%= medicine.id %>" method="POST" id="form"   >
 					<% } else { %>
 						<form action="/admin/add-medicine" id="form" method="POST">
 					<% } %>
@@ -29,6 +28,7 @@
 					<!-- <input type="text" placeholder="Type of medicine"><br /> -->
 					<% if (edit) { %>
 						<label for="expDate"><%= medicine.expDate.getDate() +"/" + (medicine.expDate.getMonth()+1) + "/" +medicine.expDate.getFullYear() %></label>
+						<br>
 					<% } else { %>
 						<input type="date" placeholder="Expiry date" name="expDate"><br />
 						<!-- <input type="date" name="expDate"> -->
