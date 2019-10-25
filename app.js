@@ -74,5 +74,5 @@ mongoose.connect(MONGODB_URI, {
         })
     .catch(err => console.log(err));
 
-// "C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe" --dbpath "D:\Studies\Projects\Web Development (JS)\Node JS\OnlinePharmacy\data"
+// "C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath "D:\Studies\Projects\Web Development (JS)\Node JS\OnlinePharmacy\data"
 exports.port = port;
