@@ -13,6 +13,8 @@
     
 ### Major Functionalities Implemented:
     Authentication (Using PassportJS)
+    Validation
     File Upload (Using Multer)
-    Sending validation Emails (Using nodemailer)
+    Pagination
+    Sending confirmation Emails (Using nodemailer)
     Admin Functionalities
