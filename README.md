@@ -18,3 +18,7 @@
     Pagination
     Sending confirmation Emails (Using nodemailer)
     Admin Functionalities
+
+### Future Scope of the Project:
+    Reset Password
+    Extend admin view functionalities
