@@ -3,7 +3,7 @@
 
 /* sets whole page to Open Sans and sets background color */
 body {
-  font-family: 'Open Sans', 'sans-serif';
+  font-family: "Open Sans", "sans-serif";
   background-image: url(http://benague.ca/files/congruent_outline.png);
 }
 
@@ -33,18 +33,18 @@ form {
 
 /* username and password fields */
 input:not([type="button"]) {
-  font-family: 'Open Sans', 'sans-serif';
+  font-family: "Open Sans", "sans-serif";
   border: 1px solid #acacac;
   color: #666;
-  opacity: .7;
+  opacity: 0.7;
   border-radius: 5px;
   padding: 20px;
   text-align: center;
   margin-bottom: 20px;
   width: 250px;
-  transition: all 1.0s;
-  -webkit-transition: all 1.0s;
-  -moz-transition: all 1.0s;
+  transition: all 1s;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
   font-size: 16px;
 }
 

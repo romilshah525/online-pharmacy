@@ -1,5 +1,5 @@
 <%- include('../includes/header.ejs') %>
-		<title>ABC Pharmacy</title>
+		<title>Medi-life Store</title>
 		<link rel="stylesheet" type="text/css" href="css/listOfMedicines.css" />
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	</head>
@@ -14,7 +14,7 @@
 				<% if (!isAdmin) {%>
 					<!-- <img src="images/image1.PNG" alt="how to" style="clear:right;"> -->
 					<div class="div1">
-						<p> Please add medicine to proceed</p>
+						<p> Please add items to proceed</p>
 						<button type="button" class="btn btn-primary btn-md" id="button" ><a href='/cart' style="text-decoration:none; color:white;">View Cart</a></button>
 						<img src="images/image1.png" style="height:450px;width:400px;top:100px;margin-top: 60px;margin-right: -300px;"/>
 					</div>
@@ -29,8 +29,8 @@
 									<p class="number">₹<%= medicine.price %>*</p>
 									<p class="estimated">* Estimated price</p>
 									<% if (isAdmin) { %>
-										<button type="button" class="btn btn-primary btn-md" id="button2"><a href="/admin/medicine/<%= medicine.id %>?edit=true" style="text-decoration:none; color:white;">Edit Medicine</a></button>
-										<button type="button" class="btn btn-primary btn-md" id="button3"><a href="/admin/delete-medicine/<%= medicine.id %>"style="text-decoration:none; color:white;">Delete Medicine</a></button>
+										<button type="button" class="btn btn-primary btn-md" id="button2"><a href="/admin/medicine/<%= medicine.id %>?edit=true" style="text-decoration:none; color:white;">Edit Item</a></button>
+										<button type="button" class="btn btn-primary btn-md" id="button3"><a href="/admin/delete-medicine/<%= medicine.id %>"style="text-decoration:none; color:white;">Delete Item</a></button>
 									<% } else { %>
 										<% if(medicine.userId && isAuthenticated == medicine.userId.username) {%>
 											<p class="estimated"><button type="button" class="btn btn-primary btn-md" id="button2" ><a href="/delete-from-cart/<%= medicine.id %>" style="text-decoration:none; color:white;">Remove From Cart</a></button></p>
@@ -60,7 +60,7 @@
 						<% } %>
 					</div> -->
 				<% } else { %>
-					<h3>No Medicines Available!</h3>
+					<h3>No Items Available!</h3>
 				<% } %>
 			</main>
 	<%- include("../includes/footer.ejs") %>

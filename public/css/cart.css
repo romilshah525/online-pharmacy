@@ -4,57 +4,56 @@
   padding-top: 4.5rem;
 } */
 /* Navbar start */
-  
-  /* Navbar end */
-  
-  .company {
-    color: #000000;
-    opacity: 0.5;
-    font-size: 14px;
-    margin: 5px;
-  }
-  .number {
-    color: #000000;
-    margin: 5px;
-  }
-  .card-title {
-    font-weight: bold;
-    font-size: 24px;
-  }
-  .estimated {
-    color: #000000;
-    font-size: 12px;
-    margin: 5px;
-  }
-  #button ,#button4{
-    background-color: #10847e;
-    font-weight: bold;
-    float: right;
-    width: 19em;
-  }
-  .card {
-    width: 45%;
-    margin-left: 300px;
-    margin-right: auto;
-    margin-top: 30px;
-    float: left;
-    /* position: fixed; */
-  }
-  .div1 {
-    margin-right: 120px;
-    margin-top: 80px;
-    float: right;
-    
-  }
-  .div2{
-    margin-right: 130px;
-    /* margin-top: 120px; */
-    float: left;
-  }
-  .h3 {
-    margin-left: 300px;
-  }
-  .fa {
-    float: right;
-  }
-  
+
+/* Navbar end */
+
+.company {
+  color: #000000;
+  opacity: 0.5;
+  font-size: 14px;
+  margin: 5px;
+}
+.number {
+  color: #000000;
+  margin: 5px;
+}
+.card-title {
+  font-weight: bold;
+  font-size: 24px;
+}
+.estimated {
+  color: #000000;
+  font-size: 12px;
+  margin: 5px;
+}
+#button,
+#button4 {
+  background-color: #10847e;
+  font-weight: bold;
+  float: right;
+  width: 19em;
+}
+.card {
+  width: 45%;
+  margin-left: 300px;
+  margin-right: auto;
+  margin-top: 30px;
+  float: left;
+  /* position: fixed; */
+}
+.div1 {
+  margin-right: 120px;
+  margin-top: 80px;
+  float: right;
+}
+.div2 {
+  margin-right: 130px;
+  /* margin-top: 120px; */
+  float: left;
+}
+.h3 {
+  margin-left: 300px;
+}
+.fa {
+  float: right;
+}

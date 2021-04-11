@@ -1,14 +1,13 @@
 body {
-    background: rgb(255, 255, 255);
-    margin: 120px 120px 120px 120px;
-    box-shadow: 5px 5px 5px 5px #d8d8d8;
-    border-radius: 5px;
+  background: rgb(255, 255, 255);
+  margin: 120px 120px 120px 120px;
+  box-shadow: 5px 5px 5px 5px #d8d8d8;
+  border-radius: 5px;
 }
-.d-flex{
-    background-color: black;
-    padding: 10px;
-    color: white;
-    margin-bottom: 10px;
-    border-radius: 5px;
-
+.d-flex {
+  background-color: black;
+  padding: 10px;
+  color: white;
+  margin-bottom: 10px;
+  border-radius: 5px;
 }

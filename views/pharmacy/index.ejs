@@ -8,10 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1 user-scalable=no">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
-
-    <link href="css/home.css" rel="stylesheet" type="text/css">
+    <link href="/css/main.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
      (function(){
     //nbm = nav bar move
@@ -82,7 +84,7 @@
         <div class="subMenu" >
             <div class="inner">
                     <a href="/" id="sTop" class="subNavBtn">Home</a>
-                    <a href="/medicine-list" class="subNavBtn">Medicine List</a>
+                    <a href="/medicine-list" class="subNavBtn">Items List</a>
                     <% if(!isAuthenticated) { %>
                         <!-- <a href="/signup" class="subNavBtn">Sign Up</a>
                             <a href="/login" class="subNavBtn">Log In</a> -->
@@ -98,7 +100,7 @@
                                     <a href="/login" id="s4" class="subNavBtn" >Login</a>
                                     </div>
                                 </div>  -->
-                                <div class="dropdown">
+                                <div class="dropdown" id="s4">
                                         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" style="color:#ffffff;padding-left:20px;padding-top: 8px;">
                                           User 
                                         </button>
@@ -108,7 +110,7 @@
                                         </div>
                                       </div>
                     <% } else if(isAuthenticated && isAdmin) { %>
-                        <a href="/admin/add-medicine" id="s4" class="subNavBtn">Add Medicine</a>
+                        <a href="/admin/add-medicine" id="s4" class="subNavBtn">Add Items</a>
                         
                         <a href="/logout" id="s4" class="subNavBtn">Log Out</a>
                     <% } else { %>
@@ -147,7 +149,7 @@
                         <div class="welcome">
                             <h1
                                 style="color: rgb(0, 0, 0);font-size: 52px;opacity: 1.0;font-family:Georgia, 'Times New Roman', Times, serif;">
-                                Welcome to<br>MEDLIFE STORE!</h1>
+                                Welcome to<br>MEDI-LIFE STORE!</h1>
                         </div>
                     </div>
                     <!-- <p>Click the links below or simply scroll down!</p> -->
@@ -163,7 +165,7 @@
     
             <div class="section s1">
                 <div class="inner">
-                    <h1 class="text-center" style="font-weight:bold;">Steps to Order Medicines </h1>
+                    <h1 class="text-center" style="font-weight:bold;">Steps to Order Items </h1>
                     <img src="images/ways1.png" alt="Steps to order medicines" style="width: 960px; height: 500px;" />
                 </div>
             </div>
@@ -278,7 +280,4 @@
 
     </div>
 </main>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <%- include("../includes/footer.ejs") %>
