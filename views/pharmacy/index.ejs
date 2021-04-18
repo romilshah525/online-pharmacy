@@ -15,60 +15,60 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
-     (function(){
-    //nbm = nav bar move
-        $.fn.nbm = function( options ) {
-            // adding a class to users div
-            $(this).addClass('nbm')
-            var settings = $.extend({
-                'scrollSpeed '  : 500
-                }, options);
-            return $('.nbm a').each( function() {
-                if ( settings.scrollSpeed ) {
-                    var scrollSpeed = settings.scrollSpeed
-                }
-                ///////////////////////////////////// get initial top offset for the menu 
-                var stickyTop = $('.nbm').offset().top;   
-                // check position and make sticky if needed
-                var stickyMenu = function(){
-                    // current distance top
-                    var scrollTop = $(window).scrollTop(); 
-                    // if we scroll more than the navigation, change its position to fixed and add class 'fxd', otherwise change it back to absolute and remove the class
-                    if (scrollTop > stickyTop) { 
-                        $('.nbm').css({ 'position': 'fixed', 'top':0 }).addClass('fxd');
-                        } else {
-                            $('.nbm').css({ 'position': 'absolute', 'top':stickyTop }).removeClass('fxd'); 
-                        }
-                };
-                // run function
-                stickyMenu();
-                // run function every time you scroll
-                $(window).scroll(function() {
-                     stickyMenu();
-                });
-                ///////////////////////////////////////
-                $(this).on('click', function(e){
-                    // gets the height of the users div. This is used for off-setting the scroll so th emenu doesnt overlap any content in the div they jst scrolled to
-                    var selectorHeight = $('.nbm').height();   
-                    // stops empty hrefs making the page jump when clicked
-                    var id = $(this).attr('id');
-                    if(id != 's4'){
-                    e.preventDefault();
-                    // get id pf the button you just clicked
-                    // gets the distance from top of the div class that matches your button id minus the height of the nav menu. This means the nav wont initially overlap the content.
-                    var goTo =  $('div.'+ id).offset().top -selectorHeight;
-                    // Scroll the page to the desired position!
-                    $("html, body").animate({ scrollTop: goTo }, scrollSpeed);
-                    }
-                }); 
-            });
-        }
-    })();
-    $(document).ready( function() {
-        $('.subMenu').nbm({
-    'scrollSpeed' : 2000 //this sets up automatic scrolling. When clicking on a tab on the nav bar, the page scrolls down to that section nice and smootly. The higher the number the slower it will scroll down. Play with this by changing the values of scrollSpeed.
-        });
-    });
+    //  (function(){
+    // //nbm = nav bar move
+    //     $.fn.nbm = function( options ) {
+    //         // adding a class to users div
+    //         $(this).addClass('nbm')
+    //         var settings = $.extend({
+    //             'scrollSpeed '  : 500
+    //             }, options);
+    //         return $('.nbm a').each( function() {
+    //             if ( settings.scrollSpeed ) {
+    //                 var scrollSpeed = settings.scrollSpeed
+    //             }
+    //             ///////////////////////////////////// get initial top offset for the menu 
+    //             var stickyTop = $('.nbm').offset().top;   
+    //             // check position and make sticky if needed
+    //             var stickyMenu = function(){
+    //                 // current distance top
+    //                 var scrollTop = $(window).scrollTop(); 
+    //                 // if we scroll more than the navigation, change its position to fixed and add class 'fxd', otherwise change it back to absolute and remove the class
+    //                 if (scrollTop > stickyTop) { 
+    //                     $('.nbm').css({ 'position': 'fixed', 'top':0 }).addClass('fxd');
+    //                     } else {
+    //                         $('.nbm').css({ 'position': 'absolute', 'top':stickyTop }).removeClass('fxd'); 
+    //                     }
+    //             };
+    //             // run function
+    //             stickyMenu();
+    //             // run function every time you scroll
+    //             $(window).scroll(function() {
+    //                  stickyMenu();
+    //             });
+    //             ///////////////////////////////////////
+    //             $(this).on('click', function(e){
+    //                 // gets the height of the users div. This is used for off-setting the scroll so th emenu doesnt overlap any content in the div they jst scrolled to
+    //                 var selectorHeight = $('.nbm').height();   
+    //                 // stops empty hrefs making the page jump when clicked
+    //                 var id = $(this).attr('id');
+    //                 if(id != 's4'){
+    //                 e.preventDefault();
+    //                 // get id pf the button you just clicked
+    //                 // gets the distance from top of the div class that matches your button id minus the height of the nav menu. This means the nav wont initially overlap the content.
+    //                 var goTo =  $('div.'+ id).offset().top -selectorHeight;
+    //                 // Scroll the page to the desired position!
+    //                 $("html, body").animate({ scrollTop: goTo }, scrollSpeed);
+    //                 }
+    //             }); 
+    //         });
+    //     }
+    // })();
+    // $(document).ready( function() {
+    //     $('.subMenu').nbm({
+    // 'scrollSpeed' : 2000 //this sets up automatic scrolling. When clicking on a tab on the nav bar, the page scrolls down to that section nice and smootly. The higher the number the slower it will scroll down. Play with this by changing the values of scrollSpeed.
+    //     });
+    // });
 
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 
 const Medicine = require("../models/medicine");
 const Order = require("../models/order");
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 20;
 let total;
 
 const keys = require("./../keys.json");
@@ -17,6 +17,7 @@ let transporter = nodemailer.createTransport({
 
 exports.getHome = (req, res) => {
   let error = req.flash("error");
+
   if (error.length > 0) {
     error = error[0];
   } else {
@@ -29,6 +30,7 @@ exports.getHome = (req, res) => {
 
 exports.getMedicineList = (req, res) => {
   let error = req.flash("error");
+
   if (error.length > 0) {
     error = error[0];
   } else {
@@ -69,6 +71,7 @@ exports.getMedicineList = (req, res) => {
 
 exports.getCart = (req, res) => {
   let error = req.flash("error");
+
   if (error.length > 0) {
     error = error[0];
   } else {
@@ -128,6 +131,7 @@ exports.postDeleteFromCart = (req, res) => {
 
 exports.getOrders = (req, res) => {
   let error = req.flash("error");
+
   if (error.length > 0) {
     error = error[0];
   } else {
@@ -168,12 +172,12 @@ exports.postOrder = (req, res) => {
         let q = m.quantity;
         amt = amt + p * q;
       });
-      console.log(keys["GMAIL_USERNAME"],keys["GMAIL_PASSWORD"]);
+      console.log(keys["GMAIL_USERNAME"], keys["GMAIL_PASSWORD"]);
       const order = new Order({
         userId: req.user,
         medicines,
         amount: amt,
-        imageUrl:'',
+        imageUrl: "",
       });
       return order.save();
     })
@@ -228,7 +232,7 @@ exports.postOrder = (req, res) => {
         from: "shahromil525@gmail.com",
         to: req.user.username,
         subject: "Order PLaced on Medi-life Store!",
-        text: html,
+        html: html,
       };
       return transporter.sendMail(mailOptions);
     })
@@ -274,6 +278,7 @@ exports.clearCart = (req, res) => {
 
 exports.getPrescriptions = (req) => {
   let error = req.flash("error");
+
   if (error.length > 0) {
     error = error[0];
   } else {
@@ -283,6 +288,7 @@ exports.getPrescriptions = (req) => {
 
 exports.getBilling = (req, res) => {
   let error = req.flash("error");
+
   if (error.length > 0) {
     error = error[0];
   } else {
@@ -295,6 +301,7 @@ exports.getBilling = (req, res) => {
 
 exports.postBilling = (req, res) => {
   let error = req.flash("error");
+
   if (error.length > 0) {
     error = error[0];
   } else {

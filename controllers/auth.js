@@ -18,6 +18,7 @@ passport.use(new localStrategy(User.authenticate()));
 
 exports.getSignUp = (req, res) => {
   let error = req.flash("error");
+
   if (error.length > 0) {
     error = error[0];
   } else {
@@ -68,6 +69,9 @@ exports.postSignUp = (req, res) => {
 
 exports.getLogin = (req, res) => {
   let error = req.flash("error");
+  // console.log(error);
+  console.log(req.flash("message"));
+
   if (error.length > 0) {
     error = error[0];
   } else {
@@ -82,7 +86,7 @@ exports.postLogin = () => {
   passport.authenticate("local", {
     successRedirect: "/medicine-list",
     failureRedirect: "/login",
-    failureFlash: { type: "error", message: "blah" },
+    failureFlash: true,
   });
 };
 
@@ -93,6 +97,7 @@ exports.getLogout = (req, res) => {
 
 exports.getResetPassword = (req, res) => {
   let error = req.flash("error");
+
   if (error.length > 0) {
     error = error[0];
   } else {

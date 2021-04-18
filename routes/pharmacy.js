@@ -48,7 +48,7 @@ router.get("/clear-cart", isLoggedIn, pharmacyController.clearCart);
 router.post(
   "/order",
   isLoggedIn,
-//   upload.single("image"),
+  //   upload.single("image"),
   pharmacyController.postOrder
 );
 router.get(
@@ -60,7 +60,7 @@ router.get(
 router.post(
   "/billing",
   isLoggedIn,
-//   upload.single("image"),
+  //   upload.single("image"),
   pharmacyController.postBilling
 );
 
