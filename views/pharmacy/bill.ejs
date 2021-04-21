@@ -18,27 +18,27 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                                <div class="card">
+                                <div class="card" style="box-shadow: 5px 5px 5px 5px #575757;">
                                     <div class="card-body p-0">
-                                        <div class="row p-5">
+                                        <div class="row p-1">
                                             <div class="col-md-6">
                                                 <!-- <img src="http://via.placeholder.com/400x90?text=logo"> -->
                                             </div>
                     
-                                            <div class="col-md-6 text-right">
+                                            <div class="col-md-1 text-right">
                                                 <p class="font-weight-bold mb-1"></p>
-                                                <p class="text-muted">Invoice </p>
+                                                <p class="text-muted" style="font-size: 18px;"><b>Invoice</b></p>
                                             </div>
                                         </div>
                     
-                                        <hr class="my-5">
+                                        <!-- <hr class="my-5"> -->
                     
-                                        <div class="row pb-5 p-5">
+                                        <div class="row pb-3 p-1">
                                             <div class="col-md-6">
-                                                <p class="font-weight-bold mb-4">Client Information</p>
-                                                <p class="mb-1"><%=user.name%></p>
+                                                <p class="font-weight-bold mb-1">Client Information</p>
+                                                <p class="mb-0">Name: <%=user.name%></p>
                                                 <!-- <p>Acme Inc</p> -->
-                                                <p class="mb-1"><%=user.address%></p>
+                                                <p class="mb-0">Address: <%=user.address%></p>
                                                 <!-- <p class="mb-1">6781 45P</p> -->
                                             </div>
                     
@@ -51,7 +51,7 @@
                                             </div> -->
                                         </div>
                     
-                                        <div class="row p-5">
+                                        <div class="row p-2">
                                             <div class="col-md-12">
                                                 <table class="table">
                                                     <%let i = 0; %>
@@ -82,7 +82,7 @@
                                             </div>
                                         </div>
                     
-                                        <div class="d-flex flex-row-reverse p-4">
+                                        <div class="d-flex flex-row-reverse p-1">
                                             <div class="py-3 px-5 text-right">
                                                 <div class="mb-2">Grand Total</div>
                                                 <div class="h2 font-weight-light"><%= amt%></div>
@@ -106,10 +106,11 @@
                         <!-- <div class="text-light mt-5 mb-5 text-center small">by : <a class="text-light" target="_blank" href="http://totoprayogo.com">totoprayogo.com</a></div> -->
                     
                     </div>
-                    
+                    <br>
                     <form action="/order" method="post">
-                        <button type="submit">PLace Order</button>
+                        <button type="submit" class="btn btn-default">Place Order</button>
                 </form>
+                <br><br>
                 </body>
             </html>
             </main>

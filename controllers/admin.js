@@ -115,7 +115,7 @@ exports.deleteMedicine = (req, res) => {
   }
   Medicine.findByIdAndRemove(id)
     .then(() => {
-      req.flash("error", "Medicine couldn't be deleted from cart!");
+      req.flash("error", "Medicine deleted from the list!");
       res.redirect("/medicine-list");
     })
     .catch((err) => {

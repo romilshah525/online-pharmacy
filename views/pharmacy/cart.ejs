@@ -64,8 +64,8 @@
 							</div>
                       
                     <% } %>
-                    <form id="msform" action="/billing" method="post" enctype="multipart/form-data">
-                        <fieldset>
+                    <!-- <form id="msform" action="/billing" method="post" enctype="multipart/form-data">
+                        <fieldset> -->
                           <!-- <h2 class="fs-title">Upload Prescription</h2>
                           <h3 class="fs-subtitle">Please upload the prescription</h3>
                           <input
@@ -75,7 +75,7 @@
                             style="justify-content: center; width:90%;"
                           /><br /> -->
                   
-                          <a href="#"
+                          <!-- <a href="#"
                             ><input
                               type="submit"
                               name="next"
@@ -85,8 +85,18 @@
                           </a>
                         </fieldset>
                        
+                      </form> -->
+                      <form id="msform" action="/billing" method="post" enctype="multipart/form-data">
+                        <fieldset>
+                        <label for="img">Select prescription:</label>
+                        <input type="file" id="img" name="img" accept="image/*">
+                        <input type="submit" name="next" class="next action-button" value=" PROCEED">
+                        
+                      </fieldset>
                       </form>
                     </div>
+                    
+                   
                 <button type="submit" class="btn btn-md" id="button4 " style="background-color:#10847e;  margin-top: 310px; margin-left:220px" ><a href="/clear-cart" style="text-decoration: none;color:#ffffff;">Clear Cart</a></button>
 
                 <!-- <form action="/billing" method="post" enctype="multipart/form-data">

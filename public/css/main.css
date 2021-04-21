@@ -559,3 +559,204 @@ nav a:hover {
   position: relative;
   padding-left: 1.25em;
 }
+.container {width:100%;}
+.sow-headline h1,.sow-headline h3 {
+	font-weight:300;
+}
+.sow-headline h1 {
+	letter-spacing:1px;
+	font-size:32px;
+}
+.sow-headline h3 {
+	font-size:19px;
+	line-height: 1.6;
+	font-weight:300;
+	letter-spacing:1px;
+}
+.sow-headline .decoration {
+	width:50px;
+	margin:24px auto 7px auto !important;
+}
+.sow-headline h1 {
+  text-align: center;
+  line-height: 1.3;
+  font-size: 34px;
+letter-spacing:1px;
+  color: #000000;
+}
+.sow-headline .decoration {
+  border-top: medium solid #50dcc9;
+  position: relative;
+  height: 1px;
+  margin: 20px 60px 20px 60px;
+}
+#sow-headline-container.sow-headline h1 {margin-bottom:10px;}
+#tline {
+	padding-bottom:60px
+}
+.tline-item-txt {
+	font-size:14px;
+}
+
+.tline-holder {
+	margin:0 auto;
+	padding:0;
+	padding-top:20px;
+	width:100%;
+	position:relative;
+	overflow:hidden;
+	list-style:none
+}
+.tline-holder:before {
+	background:#e4e4e4;
+	content:"";
+	left:50%;
+	top:20px;
+	bottom:0;
+	position:absolute;
+	width:1px;
+	margin-left:-1px;
+	height:9999px
+}
+ul .tline-holder>li {
+	width:100%;
+	float:left;
+	display:inline-block
+}
+.tline-item-content {
+	width:571px;
+}
+.tline-item-content a {color:inherit;font-weight: 700;}
+.tline-item-txt {
+	position:relative;
+	padding:20px;
+	background:#fff;
+	border:1px solid #e4e4e4;
+	margin-top:-20px
+}
+.tline-item-txt h3 {
+	text-transform:uppercase;
+	font-size:17px;
+	margin-top:10px;
+	margin-bottom:10px;
+	color: #333;
+}
+.tline-holder li:nth-child(odd) .tline-item-txt h3 {
+	text-align:left;
+	margin-right:0
+}
+.tline-item-txt .meta {
+	color:#999
+}
+.tline-holder li:nth-child(odd) .tline-item-content:hover .date-icon,.tline-item-right .tline-item-content:hover .date-icon {
+	-webkit-animation:pulse .3s;
+	animation:pulse .3s
+}
+.tline-holder li:nth-child(odd) {
+	float:left;
+	position:relative
+}
+.tline-holder li:nth-child(odd) .tline-item-content {
+	float:left
+}
+.tline-holder li:nth-child(odd) .tline-item-txt {
+	margin-right:60px
+}
+.tline-holder li:nth-child(odd) .date-icon {
+	margin-right:-20px;
+	float:right;
+	background-color:#303543;
+	color:#fff
+}
+.tline-holder li {
+	float:right;
+	position:relative;
+	max-width:100%;
+}
+.tline-holder li:nth-child(even) .tline-item-content {
+	float:right;
+	text-align:right;
+}
+.tline-holder li:nth-child(even) .tline-item-txt {
+	margin-left:60px;
+	text-align:right;
+}
+.tline-holder li:nth-child(even) .date-icon {
+	margin-left:-20px;
+	float:left
+}
+.tline-item-txt:before,.tline-item-txt:after {
+	content:" ";
+	position:absolute;
+	top:24px;
+	display:block;
+	width:0;
+	height:0;
+	border-top:solid 15px transparent;
+	border-bottom:solid 15px transparent
+}
+.tline-holder li:nth-child(odd) .tline-item-txt:before,.tline-holder li:nth-child(odd) .tline-item-txt:after {
+	right:-18px;
+	border-left:solid 20px #fff
+}
+.tline-holder li:nth-child(odd) .tline-item-txt:before {
+	right:-20px;
+	border-left-color:#e4e4e4
+}
+.tline-holder li:nth-child(even) .tline-item-txt:before,.tline-holder li:nth-child(even) .tline-item-txt:after {
+	left:-18px;
+	border-right:solid 20px #fff
+}
+.tline-holder li:nth-child(even) .tline-item-txt:before {
+	left:-20px;
+	border-right-color:#e4e4e4
+}
+.tline-start {
+	width:100% !Important;
+	float:left;
+	padding:0;
+	position:absolute;
+	bottom:0;
+}
+.tline-start-content {
+	text-align:center;
+}
+.tline-start .tline-start-icon {
+	margin:0 auto;
+	margin-bottom:20px;
+	width:12px;
+	height:12px;
+	border-radius:100%;
+	-moz-border-radius:100%;
+	-webkit-border-radius:100%;
+	background-color:#ccc;
+}
+.metatags {
+	margin:15px 0;
+}
+.metapost {
+	border-top:1px solid #eee;
+	border-bottom:1px solid #eee;
+	padding:10px 0;
+	margin-top:5px;
+}
+.metapost a {
+	color:inherit;
+}
+.btn {
+	padding:16px 30px;
+	margin-top:15px
+}
+.btn-inverse {
+	background-color:#111;
+	border:1px solid #111;
+	color:#fff
+}
+.wow {
+  visibility:visible!important;
+  -webkit-animation:none!important;
+  -moz-animation:none!important;
+  -o-animation:none!important;
+  -ms-animation:none!important;
+  animation:none!important
+}
